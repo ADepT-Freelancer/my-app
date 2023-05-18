@@ -1,0 +1,8 @@
+
+ .dialog a{
+	padding: 0px 10px;
+	color: #103c0b;
+ }
+ .dialog.active a{
+	color:#bddd3d;
+ }

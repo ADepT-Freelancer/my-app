@@ -1,0 +1,29 @@
+.nav {
+	grid-area: n;
+	background: rgb(19, 19, 146);
+	
+ }
+ 
+ ul {
+	padding-left: 0
+ }
+
+ .item {
+	list-style-type: none;
+	&:last-child {
+		margin-top: 1rem;
+	 }
+
+ }
+ 
+ .item a {
+text-decoration: none;
+	padding: 0 20px;
+	color: #92a42e;
+
+}
+
+
+a.active {
+	color: #38ed20;
+}

@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+/MyTasks.txt
 # production
 /build
 
