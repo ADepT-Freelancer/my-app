@@ -5,7 +5,13 @@ import Contacts from "./Contacts/Contacts";
 
 const MyPosts = (props) => {
 let postsElement = props.posts.map ((p) => 
-<Post likeCounter={p.likeCounter} id={p.id} title={p.title} photo={p.photo} link={p.link}  />)
+<Post 
+likeCounter={p.likeCounter}  
+textButton={p.textButton} 
+link={p.link} 
+id={p.id} 
+title={p.title} 
+photo={p.photo}   />)
 
   return (
     <div className={s.postsBlock}>
