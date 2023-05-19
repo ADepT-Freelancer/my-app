@@ -13,7 +13,7 @@ const Contacts = (props) => {
 <section className="page__contacts contacts">
   <div className="contacts__container">
     <div className="contacts__content">
-      <form action="#" className="contacts__form form">
+      {/* <form action="#" className="contacts__form form">
         <div className="form__item">
           <input
             autoComplete="off"
@@ -51,7 +51,7 @@ const Contacts = (props) => {
             Send Message
           </button>
         </div>
-      </form>
+      </form> */}
       <div className="contacts__body">
         <ul className="contacts__list list-contacts">
           <li className="list-contacts__item">

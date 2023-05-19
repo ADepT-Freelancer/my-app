@@ -8,26 +8,27 @@ import s from "./Post.module.css";
 // </div>
 
 const Post = (props) => {
+
   return (
     <article className="item-portfolio">
-      <a href={props.posts.link} className="item-portfolio__image-ibg">
-        <img src={props.posts.photo} alt="Agency Website" />
+      <a href={props.link} className="item-portfolio__image-ibg">
+        <img src={props.photo} alt="Agency Website" />
       </a>
       <div className="item-portfolio__body">
         <h4 className="item-portfolio__title">
-          <a href={props.posts.link} className="item-portfolio__link-title">
-            {props.posts.title}
+          <a href={props.link} className="item-portfolio__link-title">
+            {props.title}
           </a>
         </h4>
         <div className="item-portfolio__footer">
           <a
-            href={props.posts.link}
+            href={props.link}
             className="item-portfolio__category category-link"
           >
-            {props.posts.textButton}
+            {props.textButton}
           </a>
           <a
-            href={props.posts.link}
+            href={props.link}
             className="item-portfolio__link _icon-link"
           />
         </div>

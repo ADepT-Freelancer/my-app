@@ -1,9 +1,9 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 
+const ProfileInfo = (props) => {
+  console.log(props)
 
-
-const ProfileInfo = () => {
   return (
     <section data-fp-section="" className="page__main main-section">
       <div className="main-section__container">
@@ -11,17 +11,18 @@ const ProfileInfo = () => {
           <div className="main-section__title title">
             <div className="title__label">MY NAME IS</div>
             <h1 className="title__value title__value_big">
-              Artem <span>Fuchko.</span>
+            {props.profileInfo.nameUser}  <span>
+            {props.profileInfo.surname}.</span>
             </h1>
           </div>
           <div className="main-section__text text">
             <p>
-   I present to you my social network project. In which links to my previous work are listed.
+            {props.profileInfo.title} 
             </p>
           </div>
           <ul className="main-section__social social">
             <li className="social__item">
-              <a href="#" className="social__link _icon-s-instagram" />
+              <a href="link" className="social__link _icon-s-instagram" />
             </li>
             <li className="social__item">
               <a href="#" className="social__link _icon-s-git" />
@@ -39,7 +40,8 @@ const ProfileInfo = () => {
             <div className="decor-main-section__image">
               <img
                 className="decor-main-section__picture"
-                src="@img/main/picture.png"
+                src=
+                {props.profileInfo.avatarProfile}
                 alt="AvatarProfile"
               />
             </div>
