@@ -1,5 +1,5 @@
 body {
-  background: #333;
+  background: #654;
 }
 
 .app-wrapper {
@@ -10,10 +10,10 @@ body {
 
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
-  grid-gap: 10px;
+  grid-gap: 0.625rem;
 }
 
 .app-wrapper-content {
   grid-area: c;
-  background: #947237;
+  background: rgb(200, 200, 200);
 }
