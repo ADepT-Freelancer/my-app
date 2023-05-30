@@ -1,13 +1,10 @@
 .item.gold {
-	color: #f5b341;
- }
+  color: #f5b341;
+}
 .item {
 }
- .item img{
-	max-width: 4rem;
+.item img {
+  max-width: 4rem;
 
-
-	border-radius: 0.5rem;
-
-	
- }
+  border-radius: 0.5rem;
+}
