@@ -1775,7 +1775,6 @@ textarea.form__input {
     min-height: 60px;
     justify-content: space-between;
     display: flex;
-    
   }
 
   .header__button {
@@ -1799,7 +1798,8 @@ textarea.form__input {
     background-color: #7e74f1;
     padding: 5.625rem 0.9375rem 1.875rem 0.9375rem;
     display: flex;
-    justify-content:center;align-items: center;
+    justify-content: center;
+    align-items: center;
   }
 
   .menu__body::before {

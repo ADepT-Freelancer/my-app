@@ -1,13 +1,13 @@
 import React from "react";
 import s from "./Profile.module.css";
-import MyPost from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
   return (
-    <main>
-      <ProfileInfo profileInfo={props.profileInfo}/>
-      <MyPost posts={props.posts} />
+    <main className={s.profile__main}>
+      <ProfileInfo />
+      <MyPostsContainer />
     </main>
   );
 };

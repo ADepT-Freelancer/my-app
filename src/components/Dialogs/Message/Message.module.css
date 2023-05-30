@@ -1,2 +1,33 @@
- .message{}
+
+
+.messages__box:nth-child(2n+1) {
+  padding: 1rem;
+  background: #423c7d;
+	color: #c8c8c8 ;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+
+}
+
+.messages__box:nth-child(2n) {
+  text-align: right;
+  padding: 1rem;
+  background: #7e74f1;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+	margin: 0.5rem 0;
+}
+
+
+textarea {
+  width: 100%;
+  height: 3rem;
+  margin: 0.6rem 0;
+  overflow: auto;
+	border-radius: 1rem;
+  padding: 0.3rem;
+}
+
 

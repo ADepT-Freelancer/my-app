@@ -1,7 +1,26 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  padding: 0.5rem;
+  gap: 0.8rem;
+}
 
-
- 
- .dialogs{
-	display: grid;
-	grid-template-columns: 2fr 10fr;
- }
+textarea {
+  width: 100%;
+  height: 3rem;
+  margin: 0.6rem 0;
+  overflow: auto;
+  border-radius: 1rem;
+  padding: 0.3rem;
+}
+.button__box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.button {
+  border-radius: 1rem;
+  padding: 0.8rem;
+  background-color: #7e74f1;
+}

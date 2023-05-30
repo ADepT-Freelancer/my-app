@@ -1,13 +1,25 @@
 .postsBlock {
-	padding: 0.6rem;
+  padding: 0.6rem;
 }
 
 .posts {
-	padding-top: 0.6rem;
-	display: grid;
-	/* justify-content:center; */
-	/* align-items: center; */
-	gap: 0.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding-top: 0.6rem;
+  display: grid;
+  /* justify-content:center; */
+  /* align-items: center; */
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 
+}
+
+.button__box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.button {
+  border-radius: 1rem;
+  padding: 0.8rem;
+  background-color: #7e74f1;
 }

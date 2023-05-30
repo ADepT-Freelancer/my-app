@@ -1,8 +1,10 @@
-
- .dialog a{
-	padding: 0px 10px;
-	color: #103c0b;
- }
- .dialog.active a{
-	color:#bddd3d;
- }
+.dialog {
+  padding: 0px 0.8rem;
+  color: #232e35;
+  line-height: 120%;
+}
+.active {
+  font-weight: 500;
+  padding-left: 0.3rem;
+  font-size: 1.25rem;
+}

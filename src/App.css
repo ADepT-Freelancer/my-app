@@ -15,5 +15,5 @@ body {
 
 .app-wrapper-content {
   grid-area: c;
-  background: rgb(200, 200, 200);
+  background: #c8c8c8
 }
