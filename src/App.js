@@ -7,19 +7,21 @@ import { Routes, Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-
-import "./css/style.css";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import "./css/style.css";
+import UsersContainer from "./components/Users/usersContainer";
 
-const App = (props) => {
+const App = () => {
   return (
     <div className="app-wrapper app-wrapper__container">
-      <Header />
       <Navbar />
+      <Header />
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/profile" element={<Profile />} />
           <Route path="/dialogs/*" element={<DialogsContainer />} />
+          <Route path="/users" element={<UsersContainer />} />
+
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />

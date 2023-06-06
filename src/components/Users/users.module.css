@@ -1,0 +1,21 @@
+.user__photo{
+	width: 12.5rem;
+}
+
+
+.user__button{
+	padding: 0.3rem;
+	background-color: #7e74f1;
+	margin: 0.3rem;
+	border-radius: 0.3rem;
+	color: #f3f3f3;
+}
+
+.selector__page {
+	font-weight: 600;
+	font-size: 1.1rem;
+	padding: 0px 0.2rem;
+}
+
+
+
