@@ -1786,11 +1786,10 @@ textarea.form__input {
   }
 
   .menu__body {
-    grid-area: n;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 80%;
     height: 100%;
     overflow: auto;
     -webkit-transition: left 0.3s ease 0s;
@@ -1801,6 +1800,12 @@ textarea.form__input {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    flex-direction: column;
+    z-index: 5;
+    opacity: 0.85;
+    gap: 1rem;
+    
   }
 
   .menu__body::before {

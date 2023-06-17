@@ -4,15 +4,12 @@ import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
-
   return (
     <main className={s.profile__main}>
-      <ProfileInfo 
-      
-      profile={props.profile} 
-      updateStatus={props.updateStatus} 
-      status={props.status} 
-      
+      <ProfileInfo
+        profile={props.profile}
+        updateStatus={props.updateStatus}
+        status={props.status}
       />
       <MyPostsContainer />
     </main>

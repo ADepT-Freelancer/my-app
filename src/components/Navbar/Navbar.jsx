@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className={s.nav}>
+    <nav className={s.nav  }>
       <ul>
         <li className={s.item}>
           <NavLink
