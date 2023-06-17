@@ -2,6 +2,9 @@
   width: 12.5rem;
 }
 
+.display__none {
+  display: none;
+}
 .user__button {
   padding: 0.3rem;
   background-color: #7e74f1;

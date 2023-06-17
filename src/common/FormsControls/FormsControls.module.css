@@ -1,0 +1,8 @@
+.form__error input,
+.form__error textarea {
+  border: 2px solid #b63c3c;
+}
+
+.form__error span {
+  color: #b63c3c;
+}

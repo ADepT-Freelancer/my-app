@@ -10,7 +10,7 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-  console.log(props.followingInProgress);
+
   return (
     <div>
       <div>USERS WILL BE HERE</div>
@@ -32,12 +32,15 @@ let Users = (props) => {
       </div>
       <div className={styles.users__items}>
         {props.users.map((u) => (
-          <div key={u.id}>
+          <div
+            key={u.id}
+            // className={u.photos.large === null ? styles.display__none : " "}
+          >
             <span>
               <div>
                 <NavLink to={"/profile/" + u.id}>
                   <img
-                    src={u.photos.small != null ? u.photos.small : userPhoto}
+                    src={u.photos.large != null ? u.photos.large : userPhoto}
                     aria-hidden
                     className={styles.user__photo}
                     alt="Photo Profile"
