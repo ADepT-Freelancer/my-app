@@ -8,8 +8,10 @@ const Profile = (props) => {
     <main className={s.profile__main}>
       <ProfileInfo
         profile={props.profile}
+        contacts={props.contacts}
         updateStatus={props.updateStatus}
         status={props.status}
+        photo={props.photo}
       />
       <MyPostsContainer />
     </main>

@@ -1,8 +1,6 @@
 import React from "react";
-// import Preloader from "./../../../common/preloader/preloader";
 
 class ProfileStatus extends React.Component {
-  // if (!this.props.status) {    return <Preloader />;  }
   statusInputRef = React.createRef();
 
   state = {
@@ -16,6 +14,7 @@ class ProfileStatus extends React.Component {
   deactivateEditMode = () => {
     this.setState({ editMode: false });
     this.props.updateStatus(this.state.status);
+    
   };
   onStatusChange = (e) => {
     this.setState({

@@ -26,13 +26,12 @@ if (!props.profile) {
             <p>
             <ProfileStatus 
             status={props.status}
-            updateStatus={props.updateStatus}
             />
             </p>
           </div>
           <ul className="main-section__social social">
             <li className="social__item">
-              <a href="link" className="social__link _icon-s-instagram" />
+              <a href="#" className="social__link _icon-s-instagram" />
             </li>
             <li className="social__item">
               <a href="#" className="social__link _icon-s-git" />
