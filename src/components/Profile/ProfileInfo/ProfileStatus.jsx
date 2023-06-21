@@ -32,7 +32,7 @@ class ProfileStatus extends React.Component {
   }
 
   render() {
-    console.log("render");
+    console.log("render status");
     return (
       <section data-fp-section="" className="page__main main-section">
         {!this.state.editMode && (

@@ -7,6 +7,7 @@ import {
   getUserProfile,
   getUserStatus,
   updateStatus,
+  updateUrlPhoto,
 } from "./../../redux/profile-reducer";
 import Profile from "./Profile";
 
@@ -19,7 +20,7 @@ class ProfileContainer extends React.Component {
         // сюди не попадаю
         this.props.history.push("/login");
       }
-     }
+    }
     this.props.getUserProfile(userId);
     this.props.getUserStatus(userId);
   }
@@ -32,6 +33,8 @@ class ProfileContainer extends React.Component {
           profile={this.props.profile}
           status={this.props.status}
           updateStatus={this.props.updateStatus}
+          updatePhoto={this.props.updateUrlPhoto}
+          urlPhoto={this.props.urlPhoto}
         />
       </div>
     );
@@ -43,6 +46,7 @@ let mapStateToProps = (state) => ({
   status: state.profilePage.status,
   authorizedUserId: state.auth.myId,
   isAuth: state.auth.isAuth,
+  urlPhoto: state.profilePage.profile.data.photos.large,
 });
 
 function withRouter(Component) {
@@ -60,6 +64,7 @@ export default compose(
     getUserProfile,
     getUserStatus,
     updateStatus,
+    updateUrlPhoto,
   }),
   withRouter,
   withAuthRedirect

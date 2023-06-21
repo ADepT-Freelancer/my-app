@@ -1105,6 +1105,21 @@ h6 {
   align-self: flex-start;
 }
 
+.profile__status {
+  width: 100%;
+  display: inline-block;
+}
+
+.profile-avatar__textarea{
+  z-index: 50;
+  width: 100%;
+}
+
+
+
+
+
+
 .skills__container {
   display: -webkit-box;
   display: -ms-flexbox;

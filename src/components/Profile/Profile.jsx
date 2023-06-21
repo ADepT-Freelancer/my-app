@@ -11,7 +11,8 @@ const Profile = (props) => {
         contacts={props.contacts}
         updateStatus={props.updateStatus}
         status={props.status}
-        photo={props.photo}
+        updateUrlPhoto={props.updateUrlPhoto}
+        urlPhoto={props.urlPhoto}
       />
       <MyPostsContainer />
     </main>

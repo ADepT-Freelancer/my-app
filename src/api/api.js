@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const instance = axios.create({
   withCredentials: true,
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -37,6 +38,13 @@ export const profileAPI = {
   },
   updateStatus(status) {
     return instance.put(`/profile/status/`, { status: status });
+  },
+  updatePhoto(photos) {
+    return instance.put(`/profile/photo/`, {
+      data: {
+        large: photos,
+      },
+    });
   },
 };
 

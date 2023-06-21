@@ -6,7 +6,7 @@ import Post from "./Post/Post";
 import { maxLengthCreator, required } from "../../utils/validators/validators";
 import { Textarea } from "../../../common/FormsControls/FormsControls";
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
   let postsElement = props.posts.map((p) => (
     <Post
       likeCounter={p.likeCounter}
@@ -19,7 +19,6 @@ const MyPosts = (props) => {
   ));
 
   const maxLength30 = maxLengthCreator(30);
-
   const AddPostForm = (props) => {
     return (
       <form onSubmit={props.handleSubmit} className={s.button__box}>
@@ -53,6 +52,6 @@ const MyPosts = (props) => {
       <Contacts />
     </div>
   );
-};
+});
 
 export default MyPosts;
