@@ -46,7 +46,7 @@ let mapStateToProps = (state) => ({
   status: state.profilePage.status,
   authorizedUserId: state.auth.myId,
   isAuth: state.auth.isAuth,
-  urlPhoto: state.profilePage.profile.data.photos.large,
+  // urlPhoto: state.profilePage.profile.data.photos.large,
 });
 
 function withRouter(Component) {

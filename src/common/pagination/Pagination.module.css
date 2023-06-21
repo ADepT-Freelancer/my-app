@@ -1,0 +1,10 @@
+
+.selector__page {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0px 0.2rem;
+}
+.pages {
+	display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.5rem, auto));
+}

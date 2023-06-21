@@ -10,7 +10,6 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
-
   return (
     <section data-fp-section="" className="page__main main-section">
       <div className="main-section__container">

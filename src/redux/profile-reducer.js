@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { profileAPI, usersAPI } from "../api/api";
 
@@ -105,7 +106,7 @@ const profileReducer = (state = initialState, action) => {
     case DELETE_POST: {
       return {
         ...state,
-        posts: state.posts.filter((p) => p.id != action.postId),
+        posts: state.posts.filter((p) => p.id !== action.postId),
       };
     }
 
@@ -128,7 +129,6 @@ export const getUserProfile = (userId) => (dispatch) => {
     dispatch(setUserProfile(data));
   });
 };
-
 export const setUserStatus = (status) => ({
   type: SET_STATUS,
   status,
@@ -141,7 +141,6 @@ export const setUserPhoto = (data) => ({
   type: SET_URL_PHOTO,
   data,
 });
-
 export const getUserStatus = (userId) => (dispatch) => {
   profileAPI.getUserStatus(userId).then((response) => {
     dispatch(setUserStatus(response.data));
