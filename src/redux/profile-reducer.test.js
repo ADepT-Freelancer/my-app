@@ -1,7 +1,4 @@
 import profileReducer, { addPostActionCreator, deletePost } from "./profile-reducer";
-import React from "react";
-import { ReactDOM } from "react-dom";
-import App from "../App";
 
 let state = {
   posts: [
