@@ -1,10 +1,18 @@
-
 .selector__page {
   font-weight: 600;
   font-size: 1.1rem;
   padding: 0px 0.2rem;
 }
-.pages {
-	display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(2.5rem, auto));
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+.pagination__button {
+  border-radius: 0.3rem;
+  background-color: #7e74f1;
+  padding: 0.1rem 0.3rem;
 }

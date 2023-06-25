@@ -4,7 +4,8 @@ export const getUserSelector = (state) => {
   return state.usersPage.users;
 };
 export const getUserState = createSelector(getUserSelector, (users) => {
-  return users.filter((u) => u.photos.large && u.status);
+  return users
+  // .filter((u) => u.photos.large && u.status);
 });
 
 export const getPageSize = (state) => {

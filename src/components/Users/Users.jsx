@@ -26,8 +26,8 @@ let Users = ({
       <Pagination
         currentPage={currentPage}
         onPageChanged={onPageChanged}
-        pageSize={pageSize}
-        totalUsersCount={totalUsersCount}
+        portionSize={pageSize}
+        totalItemsCount={totalUsersCount}
       />
 
       <div className={styles.users__items}>
