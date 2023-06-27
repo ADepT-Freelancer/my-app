@@ -10,10 +10,18 @@ body {
 
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
-  grid-gap: 0.625rem;
+  grid-gap: 0.25rem;
+
+
 }
 
 .app-wrapper-content {
-  grid-area: c;
-  background: #c8c8c8
+  background: #f5f5dc;
+  border-radius: 0.5rem;
 }
+.app-wrapper-content-inside {
+  background: #f5f5dc;
+  border-radius: 0.5rem;
+  min-height: 100vh;
+}
+

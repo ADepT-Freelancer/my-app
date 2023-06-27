@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
-import Preloader from "./../../../common/preloader/preloader";
 import userPhoto from "../../../assets/images/user.jpg";
+import Preloader from "./../../../common/preloader/preloader";
 import ProfileStatusWithHocks from "./ProfileStatusWithHocks";
 // import ProfilePhotosWithHocks from "./ProfilePhotoWithHocks";
 
@@ -10,6 +10,13 @@ const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
+
+  const onMainPhotoSelector = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  };
+
   return (
     <section data-fp-section="" className="page__main main-section">
       <div className="main-section__container">
@@ -22,27 +29,14 @@ const ProfileInfo = (props) => {
             </h1>
           </div>
           <div className="main-section__text text">
-            <p>
-              <ProfileStatusWithHocks
-                status={props.status}
-                updateStatus={props.updateStatus}
-              />
-            </p>
+            <ProfileStatusWithHocks
+              status={props.status}
+              updateStatus={props.updateStatus}
+            />
           </div>
-          <ul className="main-section__social social">
-            <li className="social__item">
-              <a href="#" className="social__link _icon-s-instagram" />
-            </li>
-            <li className="social__item">
-              <a href="#" className="social__link _icon-s-git" />
-            </li>
-            <li className="social__item">
-              <a href="#" className="social__link _icon-s-twitter" />
-            </li>
-            <li className="social__item">
-              <a href="#" className="social__link _icon-s-linkedin" />
-            </li>
-          </ul>
+          <SocialNetworks profile={props.profile.data} />
+          {/* <ProfileData profile={props.profile.data} /> */}
+          {/* <Contactcs profile={props.profile.data} /> */}
         </div>
         <div className="main-section__decor decor-main-section">
           <div className="decor-main-section__box">
@@ -65,8 +59,82 @@ const ProfileInfo = (props) => {
             </div>
           </div>
         </div>
+        {props.isOwner && (
+          <input type={"file"} onChange={onMainPhotoSelector} />
+        )}
       </div>
     </section>
+  );
+};
+
+const SocialNetworks = ({ profile }) => {
+  return (
+    <ul className="main-section__social social">
+      <li className="social__item">
+        <a
+          href={profile.contacts.instagram}
+          className="social__link _icon-s-instagram"
+        />
+      </li>
+      <li className="social__item">
+        <a
+          href={profile.contacts.github}
+          className="social__link _icon-s-git"
+        />
+      </li>
+      <li className="social__item">
+        <a
+          href={profile.contacts.twitter}
+          className="social__link _icon-s-twitter"
+        />
+      </li>
+      <li className="social__item">
+        <a
+          href={profile.contacts.mainLink}
+          className="social__link _icon-s-linkedin"
+        />
+      </li>
+    </ul>
+  );
+};
+
+const ProfileData = ({ profile }) => {
+  return (
+    <div>
+      <div className="social__item">
+        <b>Looking for a job </b>:{profile.lookingForAJob ? "yes" : "no"}
+      </div>
+      {profile.lookingForAJob && (
+        <div className="social__item">
+          <b>About me: </b>: {profile.lookingForAJobDescription}
+        </div>
+      )}
+    </div>
+  );
+};
+const Contactcs = ({ profile }) => {
+  return (
+    <div className="profile__contacts contacts ">
+      <b>Contactcs</b>:
+      <div className="contacts__items">
+        {Object.keys(profile.contacts).map((key) => {
+          return (
+            <Contact
+              key={key}
+              contactTitle={key}
+              contactValue={profile.contacts[key]}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+const Contact = ({ contactTitle, contactValue }) => {
+  return (
+    <div>
+      <b>{contactTitle}</b>: {contactValue}
+    </div>
   );
 };
 

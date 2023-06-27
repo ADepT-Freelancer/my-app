@@ -1,5 +1,6 @@
 .user__photo {
   width: 12.5rem;
+  border-radius: 1rem;
 }
 
 .display__none {

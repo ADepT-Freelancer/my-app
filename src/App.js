@@ -14,23 +14,20 @@ import Preloader from "./common/preloader/preloader";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 import Music from "./components/Music/Music";
-import Navbar from "./components/Navbar/Navbar";
+// import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import "./css/style.css";
 import { initializeApp } from "./redux/app-reducer";
 import store from "./redux/redux-store";
 
-
-// import DialogsContainer from "./components/Dialogs/DialogsContainer";
-// import ProfileContainer from "./components/Profile/ProfilleContainer";
-// import UsersContainer from "./components/Users/usersContainer";
- 
-
-const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = lazy(() => import('./components/Profile/ProfilleContainer'));
-const UsersContainer = lazy(() => import('./components/Users/usersContainer'));
-
+const DialogsContainer = lazy(() =>
+  import("./components/Dialogs/DialogsContainer")
+);
+const ProfileContainer = lazy(() =>
+  import("./components/Profile/ProfilleContainer")
+);
+const UsersContainer = lazy(() => import("./components/Users/usersContainer"));
 
 class App extends Component {
   componentDidMount() {
@@ -41,31 +38,34 @@ class App extends Component {
       return <Preloader />;
     }
     return (
-      <div className="app-wrapper app-wrapper__container">
-        <Navbar />
+      <div 
+      className="wrapper wrapper__container">
+        {/* <Navbar /> */}
         <HeaderContainer />
         <div className="app-wrapper-content">
-          <Suspense
-            fallback={
-              <div>
-                <Preloader />
-              </div>
-            }
-          >
-            <Routes>
-              <Route
-                path="/profile/:userId?"
-                element={<ProfileContainer />}
-              ></Route>
-              <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/users" element={<UsersContainer />} />
-
-              <Route path="/news" element={<News />} />
-              <Route path="/music" element={<Music />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/login" element={<LoginPage />} />
-            </Routes>
-          </Suspense>
+          <div className="app-wrapper-content-inside">
+            <Suspense
+              fallback={
+                <div>
+                  <Preloader />
+                </div>
+              }
+            >
+              <Routes >
+                <Route
+                  path="/profile/:userId?"
+                  element={<ProfileContainer />}
+                ></Route>
+                <Route path="/dialogs/*" element={<DialogsContainer />} />
+                <Route path="/users" element={<UsersContainer />} />
+  
+                <Route path="/news" element={<News />} />
+                <Route path="/music" element={<Music />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/login" element={<LoginPage />} />
+              </Routes>
+            </Suspense>
+          </div>
         </div>
       </div>
     );
