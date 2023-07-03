@@ -150,6 +150,9 @@ h6 {
   min-width: 0;
 }
 
+
+
+
 /*
 (i) Стили будут применяться ко 
 всем классам содержащим *__container
@@ -309,6 +312,16 @@ h6 {
   -o-object-fit: contain;
   object-fit: contain;
 }
+
+
+.common__button {
+  border-radius: 0.3rem;
+  background-color: #7e74f1;
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+
+}
+
 
 .title__label {
   text-transform: uppercase;
@@ -520,27 +533,36 @@ h6 {
   line-height: 1.2142857143;
 }
 
-.main-section__container {
-  display: -ms-grid;
+.main-section__content {
+  /* display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   -ms-grid-columns: Srepeat(2, 1fr);
   grid-template-columns: Srepeat(2, 1fr);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  
   -webkit-column-gap: 1.25rem;
   -moz-column-gap: 1.25rem;
-  column-gap: 1.25rem;
+  column-gap: 1.25rem; */
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .decor-main-section {
   padding-top: 2rem;
   padding-bottom: 2rem;
 
-  max-width: 50%;
-  margin: 0 1.375rem;
+  width: 100%;
+  /* margin: 0 1.375rem; */
+  margin: 0px auto;
+
   -ms-grid-column-align: center;
   justify-self: center;
 }
@@ -571,7 +593,8 @@ h6 {
 
 .decor-main-section__box::after {
   z-index: 5;
-  background: url("../img/main/lines.svg") top right/58% no-repeat;
+  /* background: url("../img/main/lines.svg") top right/70% no-repeat; */
+  background: url("../img/main/lines.svg") 200% -20%/70% no-repeat;
 }
 
 .decor-main-section__image {
@@ -1132,12 +1155,19 @@ h6 {
   flex-direction: column;
   gap: 0.2rem;
   color: #7e74f1;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .profile__contacts {
-  padding-top: 0.3rem;
+  padding-top: 0.5rem;
 }
 
+.profile__looking-job {
+  padding-top: 0.5rem;
+}
 .skills__container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1373,6 +1403,10 @@ h6 {
   padding: 0.3125rem 1.5rem 0rem 1.5rem;
   color: red;
   font-size: 0.75rem;
+}
+
+.post__textarea {
+  /* width: 80%; */
 }
 
 textarea.form__input {

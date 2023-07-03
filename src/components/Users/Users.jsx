@@ -33,6 +33,7 @@ let Users = ({
       <div className={styles.users__items}>
         {props.users.map((user) => (
           <UserProfile
+          key={user.id}
             user={user}
             followingInProgress={followingInProgress}
             unfollow={unfollow}

@@ -5,7 +5,7 @@ export const getUserSelector = (state) => {
 };
 export const getUserState = createSelector(getUserSelector, (users) => {
   return users
-  // .filter((u) => u.photos.large && u.status);
+  .filter((u) => u.photos.large && u.status);
 });
 
 export const getPageSize = (state) => {

@@ -7,8 +7,9 @@ import { maxLengthCreator, required } from "../../utils/validators/validators";
 import { Textarea } from "../../../common/FormsControls/FormsControls";
 
 const MyPosts = React.memo((props) => {
-  let postsElement = props.posts.map((p) => (
+  let postsElement = props.posts.toReversed().map((p) => (
     <Post
+    key={p.id}
       likeCounter={p.likeCounter}
       textButton={p.textButton}
       link={p.link}
@@ -28,6 +29,7 @@ const MyPosts = React.memo((props) => {
             component={Textarea}
             name="newPostBody"
             validate={[required, maxLength30]}
+            className={s.posts__textarea}
           />
         </div>
         <div>

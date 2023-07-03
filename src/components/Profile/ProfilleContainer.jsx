@@ -9,6 +9,8 @@ import {
   updateStatus,
   updateUrlPhoto,
   savePhotoss,
+  saveProfileData,
+  setEditMode,
 } from "./../../redux/profile-reducer";
 import Profile from "./Profile";
 
@@ -40,6 +42,8 @@ class ProfileContainer extends React.Component {
       <div>
         <Profile
           {...this.props}
+          isProfileEditMode={this.props.isProfileEditMode}
+          saveProfileData={this.props.saveProfileData}
           isOwner={!this.props.router.params.userId}
           profile={this.props.profile}
           status={this.props.status}
@@ -47,6 +51,8 @@ class ProfileContainer extends React.Component {
           updatePhoto={this.props.updateUrlPhoto}
           urlPhoto={this.props.urlPhoto}
           savePhoto={this.props.savePhotoss}
+          setEditMode={this.props.setEditMode}
+
         />
       </div>
     );
@@ -58,6 +64,7 @@ let mapStateToProps = (state) => ({
   status: state.profilePage.status,
   authorizedUserId: state.auth.myId,
   isAuth: state.auth.isAuth,
+  isProfileEditMode: state.profilePage.isProfileEditMode,
   // urlPhoto: state.profilePage.profile.data.photos.large,
 });
 
@@ -78,6 +85,8 @@ export default compose(
     updateStatus,
     updateUrlPhoto,
     savePhotoss,
+    saveProfileData,
+    setEditMode,
   }),
   withRouter,
   withAuthRedirect

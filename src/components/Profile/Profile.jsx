@@ -7,6 +7,7 @@ const Profile = (props) => {
   return (
     <main className={s.profile__main}>
       <ProfileInfo
+        saveProfileData={props.saveProfileData}
         profile={props.profile}
         contacts={props.contacts}
         updateStatus={props.updateStatus}
@@ -15,6 +16,9 @@ const Profile = (props) => {
         urlPhoto={props.urlPhoto}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}
+        isProfileEditMode={props.isProfileEditMode}
+        setEditMode={props.setEditMode}
+
       />
       <MyPostsContainer />
     </main>

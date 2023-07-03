@@ -20,9 +20,13 @@ const Header = (props) => {
   return (
     <header className="header">
       <div className="header__container">
-        <a href="#" className="header__logo">
-          <img src="./favicon.ico" alt="Logo" />
-        </a>
+        <NavLink
+          to="/profile"
+        >
+          <a href="#" className="header__logo">
+            <img src="./favicon.ico" alt="Logo" />
+          </a>
+        </NavLink>
 
         <div class={isMenuOpen && "menu-open"}>
           <nav className=" menu__body">

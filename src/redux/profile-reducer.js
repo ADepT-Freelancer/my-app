@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { profileAPI, usersAPI } from "../api/api";
+import { stopSubmit } from "redux-form";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -8,6 +9,8 @@ const SET_STATUS = "SET_STATUS";
 const SET_URL_PHOTO = "SET_URL_PHOTO";
 const DELETE_POST = "DELETE_POST";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+const SAVE_PROFILE_DATA_SUCCESS = "SAVE_PROFILE_DATA_SUCCESS";
+const SET_EDIT_MODE = "SET_EDIT_MODE";
 
 let initialState = {
   posts: [
@@ -64,6 +67,7 @@ let initialState = {
   ],
   profile: null,
   status: "",
+  isProfileEditMode: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -102,6 +106,13 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.profile,
+        isProfileEditMode: false,
+      };
+    }
+    case SET_EDIT_MODE: {
+      return {
+        ...state,
+        isProfileEditMode: true,
       };
     }
     case DELETE_POST: {
@@ -111,6 +122,12 @@ const profileReducer = (state = initialState, action) => {
       };
     }
     case SAVE_PHOTO_SUCCESS: {
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
+    }
+    case SAVE_PROFILE_DATA_SUCCESS: {
       return {
         ...state,
         profile: { ...state.profile, photos: action.photos },
@@ -126,10 +143,12 @@ export const addPostActionCreator = (newPostBody) => ({
   type: ADD_POST,
   newPostBody,
 });
-
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile,
+});
+export const setEditMode = () => ({
+  type: SET_EDIT_MODE,
 });
 export const getUserProfile = (userId) => (dispatch) => {
   usersAPI.getUserProfile(userId).then((data) => {
@@ -148,6 +167,10 @@ export const savePhotoSuccess = (photos) => ({
   type: SAVE_PHOTO_SUCCESS,
   photos,
 });
+export const saveProfileDataSuccess = (formData) => ({
+  type: SAVE_PROFILE_DATA_SUCCESS,
+  formData,
+});
 export const setUserPhoto = (data) => ({
   type: SET_URL_PHOTO,
   data,
@@ -158,13 +181,18 @@ export const getUserStatus = (userId) => (dispatch) => {
   });
 };
 export const updateStatus = (status) => (dispatch) => {
-  profileAPI.updateStatus(status).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setUserStatus(status));
-    }
-  });
-};
+  try {
+    profileAPI.updateStatus(status).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status));
+    debugger;
 
+      }
+    });
+  } catch (error) {
+    debugger;
+  }
+};
 export const savePhotoss = (photoFile) => (dispatch) => {
   profileAPI.savePhoto(photoFile).then((response) => {
     if (response.data.resultCode === 0) {
@@ -172,6 +200,20 @@ export const savePhotoss = (photoFile) => (dispatch) => {
     }
   });
 };
+export const saveProfileData =
+  (formProfileData) => async (dispatch, getState) => {
+    const response = await profileAPI.saveProfileData(formProfileData);
+    if (response.data.resultCode === 0) {
+      const userId = formProfileData.userId;
+
+      dispatch(getUserProfile(userId));
+    } else {
+      dispatch(
+        stopSubmit("editProfile", { _error: response.data.messages[0] })
+      );
+      return Promise.reject(response.data.messages[0]);
+    }
+  };
 export const updateUrlPhoto = (photos) => (dispatch) => {
   profileAPI.updatePhoto(photos).then((response) => {
     if (response.data.resultCode === 0) {

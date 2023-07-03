@@ -40,7 +40,6 @@ let Pagination = ({
             return (
               <span
                 className={currentPage === p && styles.selector__page}
-                key={p}
                 onClick={(e) => {
                   onPageChanged(p);
                 }}

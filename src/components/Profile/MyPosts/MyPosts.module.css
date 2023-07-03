@@ -9,13 +9,12 @@
   /* align-items: center; */
   gap: 0.5rem;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-
 }
 
 .button__box {
   width: 100%;
   display: flex;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   align-items: center;
 }
 .button {
@@ -26,5 +25,6 @@
 }
 .posts__textarea {
   width: 100%;
-  padding: 0px 0.5rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
 }
