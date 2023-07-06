@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { profileAPI, usersAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -12,7 +13,16 @@ const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 const SAVE_PROFILE_DATA_SUCCESS = "SAVE_PROFILE_DATA_SUCCESS";
 const SET_EDIT_MODE = "SET_EDIT_MODE";
 
-let initialState = {
+
+type InitialStateType = {
+  posts: PostType[];
+  profile: ProfileType;
+  status: string | null;
+  isProfileEditMode: boolean;
+  photos: PhotosType;
+};
+
+let initialState: InitialStateType = {
   posts: [
     {
       id: 1,
@@ -65,12 +75,31 @@ let initialState = {
     // { id: 3, post: "Yo", likeCounter: 105 },
     // { id: 4, post: "Yo", likeCounter: 105 },
   ],
-  profile: null,
+  profile: {
+    userId: 1,
+    lookingForAJob: true,
+    lookingForAJobDescription: " ",
+    fullName: " ",
+    contacts: {
+      github: " ",
+      vk: " ",
+      facebook: " ",
+      instagram: " ",
+      twitter: " ",
+      website: " ",
+      youtube: " ",
+      mainLink: " ",
+    },
+  },
   status: "",
   isProfileEditMode: false,
+  photos: {
+    large: null,
+    small: null,
+  },
 };
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
       return {
@@ -96,12 +125,6 @@ const profileReducer = (state = initialState, action) => {
         status: action.status,
       };
     }
-    case SET_URL_PHOTO: {
-      return {
-        ...state.profilePage.profile.data.photos,
-        large: action.data,
-      };
-    }
     case SET_USER_PROFILE: {
       return {
         ...state,
@@ -124,13 +147,13 @@ const profileReducer = (state = initialState, action) => {
     case SAVE_PHOTO_SUCCESS: {
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photos },
+        profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
     }
     case SAVE_PROFILE_DATA_SUCCESS: {
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photos },
+        profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
     }
 
@@ -139,42 +162,73 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostActionCreator = (newPostBody) => ({
+type AddPostActionCreatorType = {
+  type: typeof ADD_POST;
+  newPostBody: string;
+};
+
+export const addPostActionCreator = (
+  newPostBody: string
+): AddPostActionCreatorType => ({
   type: ADD_POST,
   newPostBody,
 });
-export const setUserProfile = (profile) => ({
+
+type SetUserProfileType = {
+  type: typeof SET_USER_PROFILE;
+  profile: ProfileType;
+};
+
+export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({
   type: SET_USER_PROFILE,
   profile,
 });
-export const setEditMode = () => ({
+type SetEditModeType = {
+  type: typeof SET_EDIT_MODE;
+};
+export const setEditMode = (): SetEditModeType => ({
   type: SET_EDIT_MODE,
 });
-export const getUserProfile = (userId) => (dispatch) => {
-  usersAPI.getUserProfile(userId).then((data) => {
-    dispatch(setUserProfile(data));
-  });
+
+type SetUserStatusType = {
+  type: typeof SET_STATUS;
+  status: string;
 };
-export const setUserStatus = (status) => ({
+export const setUserStatus = (status: string): SetUserStatusType => ({
   type: SET_STATUS,
   status,
 });
-export const deletePost = (postId) => ({
+type DeletePostType = {
+  type: typeof DELETE_POST;
+  postId: number;
+};
+export const deletePost = (postId: number): DeletePostType => ({
   type: DELETE_POST,
   postId,
 });
-export const savePhotoSuccess = (photos) => ({
+type SavePhotoSuccessType = {
+  type: typeof SAVE_PHOTO_SUCCESS;
+  photos: PhotosType;
+};
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessType => ({
   type: SAVE_PHOTO_SUCCESS,
   photos,
 });
-export const saveProfileDataSuccess = (formData) => ({
+type SaveProfileDataSuccessType = {
+  type: typeof SAVE_PROFILE_DATA_SUCCESS;
+  formData: ContactsType;
+};
+export const saveProfileDataSuccess = (
+  formData: ContactsType
+): SaveProfileDataSuccessType => ({
   type: SAVE_PROFILE_DATA_SUCCESS,
   formData,
 });
-export const setUserPhoto = (data) => ({
-  type: SET_URL_PHOTO,
-  data,
-});
+export const getUserProfile = (userId) => (dispatch) => {
+  usersAPI.getUserProfile(userId).then((profileData: any) => {
+    dispatch(setUserProfile(profileData));
+  });
+};
 export const getUserStatus = (userId) => (dispatch) => {
   profileAPI.getUserStatus(userId).then((response) => {
     dispatch(setUserStatus(response.data));
@@ -185,8 +239,7 @@ export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status).then((response) => {
       if (response.data.resultCode === 0) {
         dispatch(setUserStatus(status));
-    debugger;
-
+        debugger;
       }
     });
   } catch (error) {
@@ -214,12 +267,5 @@ export const saveProfileData =
       return Promise.reject(response.data.messages[0]);
     }
   };
-export const updateUrlPhoto = (photos) => (dispatch) => {
-  profileAPI.updatePhoto(photos).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setUserPhoto(photos));
-    }
-  });
-};
 
 export default profileReducer;

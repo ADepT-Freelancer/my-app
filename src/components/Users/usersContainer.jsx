@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "../../common/preloader/preloader";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
   follow,
   setCurrentPage,

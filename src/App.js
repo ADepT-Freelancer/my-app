@@ -19,7 +19,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import "./css/style.css";
-import { initializeApp } from "./redux/app-reducer";
+import { initializeApp } from "./redux/app-reducer.ts";
 import store from "./redux/redux-store";
 
 const DialogsContainer = lazy(() =>

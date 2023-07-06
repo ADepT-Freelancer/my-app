@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import { Input, createField } from "../../common/FormsControls/FormsControls";
 import { maxLengthCreator, required } from "../utils/validators/validators";
-import { login } from "./../../redux/auth-reducer";
+import { login } from "./../../redux/auth-reducer.tsx";
 import style from "../../common/FormsControls/FormsControls.module.css";
 const maxLength20 = maxLengthCreator(20);
 
