@@ -2,12 +2,11 @@
 import React from "react";
 import { profileAPI, usersAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
-import { PhotosType, PostType, ProfileType } from "../types/types";
+import { ContactsType, PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
-const SET_URL_PHOTO = "SET_URL_PHOTO";
 const DELETE_POST = "DELETE_POST";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
 const SAVE_PROFILE_DATA_SUCCESS = "SAVE_PROFILE_DATA_SUCCESS";
@@ -19,10 +18,10 @@ type InitialStateType = {
   profile: ProfileType;
   status: string | null;
   isProfileEditMode: boolean;
-  photos: PhotosType;
 };
 
 let initialState: InitialStateType = {
+  
   posts: [
     {
       id: 1,
@@ -90,13 +89,14 @@ let initialState: InitialStateType = {
       youtube: " ",
       mainLink: " ",
     },
+    photos: {
+      large: null,
+      small: null,
+    },
   },
   status: "",
   isProfileEditMode: false,
-  photos: {
-    large: null,
-    small: null,
-  },
+ 
 };
 
 const profileReducer = (state = initialState, action): InitialStateType => {
@@ -128,7 +128,7 @@ const profileReducer = (state = initialState, action): InitialStateType => {
     case SET_USER_PROFILE: {
       return {
         ...state,
-        profile: action.profile,
+        profile: action.profile.data,
         isProfileEditMode: false,
       };
     }
@@ -239,7 +239,6 @@ export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status).then((response) => {
       if (response.data.resultCode === 0) {
         dispatch(setUserStatus(status));
-        debugger;
       }
     });
   } catch (error) {

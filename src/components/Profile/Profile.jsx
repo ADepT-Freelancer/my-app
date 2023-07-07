@@ -8,11 +8,10 @@ const Profile = (props) => {
     <main className={s.profile__main}>
       <ProfileInfo
         saveProfileData={props.saveProfileData}
-        profile={props.profile}
+        profilePage={props.profilePage}
         contacts={props.contacts}
         updateStatus={props.updateStatus}
         status={props.status}
-        updateUrlPhoto={props.updateUrlPhoto}
         urlPhoto={props.urlPhoto}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}

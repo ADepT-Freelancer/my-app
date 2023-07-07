@@ -108,9 +108,9 @@ export const unfollowSuccess = (userId: number): UnfollowSuccessType => ({
   type: UNFOLLOW,
   userId,
 });
-export const setUsers = (users: UserType[]) => ({ type: SETUSERS, users });
+export const setUsers = (users: UserType[]): SetUsersType => ({ type: SETUSERS, users });
 
-export const setCurrentPage = (currentPage: number): SetUsersType => ({
+export const setCurrentPage = (currentPage: number): SetCurrentPage => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });

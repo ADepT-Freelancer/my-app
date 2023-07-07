@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import userPhoto from "../../assets/images/user.jpg";
 import styles from "./users.module.css";
 
+
+
 let UserProfile = ({ user, followingInProgress, unfollow, follow, ...props }) => {
   return (
         <div key={user.id}>

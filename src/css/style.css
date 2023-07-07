@@ -569,7 +569,7 @@ h6 {
 
 .decor-main-section__box {
   position: relative;
-  padding-bottom: 119.0476190476%;
+  padding-bottom: 120%;
 }
 
 .decor-main-section__box::before,
@@ -1981,8 +1981,10 @@ textarea.form__input {
     row-gap: 1.875rem;
   }
 
-  .decor-main-section {
-    max-width: none;
+  @supports (width: clamp(15.375rem, 13.396978022rem + 9.8901098901vw, 21rem)) {
+    .decor-main-section {
+      width: clamp(15.375rem, 13.396978022rem + 9.8901098901vw, 21rem);
+    }
   }
 }
 
@@ -2558,7 +2560,7 @@ textarea.form__input {
   }
 }
 
-@media (max-width: 47.99875em) and (min-width: 20em) and (max-width: 76.875em) {
+@media (max-width: 4700.99875em) and (min-width: 20em) and (max-width: 76.875em) {
   @supports (width: clamp(15.375rem, 13.396978022rem + 9.8901098901vw, 21rem)) {
     .decor-main-section {
       width: clamp(15.375rem, 13.396978022rem + 9.8901098901vw, 21rem);

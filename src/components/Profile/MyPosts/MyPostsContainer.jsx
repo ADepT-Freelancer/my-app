@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import {
   addPostActionCreator
-} from "../../../redux/profile-reducer";
+} from "../../../redux/profile-reducer.ts";
 import MyPosts from "./MyPosts";
 
 let f1 = (state) => {

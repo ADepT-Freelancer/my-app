@@ -1,10 +1,25 @@
 /* eslint-disable eqeqeq */
 import React from "react";
-import Pagination from "../../common/pagination/pagination";
-import UserProfile from "./User";
+import Pagination from "../../common/pagination/pagination.tsx";
+import UserProfile from "./User.tsx";
 import styles from "./users.module.css";
+import { UserType } from "../../types/types";
 
-let Users = ({
+type PropsType = {
+  currentPage: number;
+  onPageChanged: () => void;
+  totalUsersCount: number;
+  pageSize: number;
+  user: UserType[];
+
+  followingInProgress: number[];
+  unfollow: () => void;
+  follow: () => void;
+  portionSize?: number;
+  users: UserType[];
+};
+
+let Users: React.FC<PropsType> = ({
   currentPage,
   onPageChanged,
   totalUsersCount,
@@ -13,13 +28,14 @@ let Users = ({
   followingInProgress,
   unfollow,
   follow,
+  users,
   ...props
 }) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+  // let pagesCount = Math.ceil(totalUsersCount / pageSize);
+  // let pages = [];
+  // for (let i = 1; i <= pagesCount; i++) {
+  //   pages.push(i);
+  // }
 
   return (
     <div>
@@ -31,9 +47,9 @@ let Users = ({
       />
 
       <div className={styles.users__items}>
-        {props.users.map((user) => (
+        {users.map((user: UserType) => (
           <UserProfile
-          key={user.id}
+            key={user.id}
             user={user}
             followingInProgress={followingInProgress}
             unfollow={unfollow}

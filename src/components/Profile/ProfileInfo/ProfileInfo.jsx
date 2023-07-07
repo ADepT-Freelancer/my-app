@@ -13,35 +13,35 @@ const ProfileInfo = (props) => {
     props.saveProfileData(formData);
   };
 
-  if (!props.profile) {
+  if (!props.profilePage.profile) {
     return <Preloader />;
   }
-
   return (
     <section data-fp-section="" className="page__main main-section">
       <div className="main-section__container">
         <div className="main-section__content">
-          <UserFullName profile={props.profile.data} />
+          <UserFullName profile={props.profilePage.profile} />
           <ProfileStatusWithHocks
-            status={props.status}
+            status={props.profilePage.status}
             updateStatus={props.updateStatus}
           />
-          <SocialNetworks profile={props.profile.data} />
+          <SocialNetworks profile={props.profilePage.profile} />
           <UsersPhoto
+            profilePage={props.profilePage}
             isOwner={props.isOwner}
             savePhoto={props.savePhoto}
-            profile={props.profile.data}
+            profile={props.profilePage.profile}
           />
           {props.isProfileEditMode ? (
             <ProfileFormDataSubmit
               onSubmit={onSubmit}
-              initialValues={props.profile.data}
-              profile={props.profile.data}
+              initialValues={props.profilePage.profile}
+              profile={props.profilePage.profile}
               status={props.status}
             />
           ) : (
             <ProfileData
-              profile={props.profile.data}
+              profile={props.profilePage.profile}
               isOwner={props.isOwner}
               setEditMode={props.setEditMode}
             />
@@ -133,7 +133,8 @@ const ContactProfile = ({ contactTitle, contactValue }) => {
     </div>
   );
 };
-const UsersPhoto = ({ savePhoto, isOwner, profile }) => {
+const UsersPhoto = ({ profilePage, savePhoto, isOwner, }) => {
+  
   const onMainPhotoSelector = (e) => {
     if (e.target.files.length) {
       savePhoto(e.target.files[0]);
@@ -146,7 +147,7 @@ const UsersPhoto = ({ savePhoto, isOwner, profile }) => {
           <div className="decor-main-section__image">
             <img
               className="decor-main-section__picture"
-              src={profile.photos.large ? profile.photos.large : userPhoto}
+              src={profilePage.profile.photos.large || userPhoto}
               alt="AvatarProfile"
             />
           </div>

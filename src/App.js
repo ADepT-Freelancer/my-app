@@ -20,15 +20,15 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import "./css/style.css";
 import { initializeApp } from "./redux/app-reducer.ts";
-import store from "./redux/redux-store";
+import store from "./redux/redux-store.ts";
 
 const DialogsContainer = lazy(() =>
   import("./components/Dialogs/DialogsContainer")
 );
 const ProfileContainer = lazy(() =>
-  import("./components/Profile/ProfilleContainer")
+  import("./components/Profile/ProfilleContainer.tsx")
 );
-const UsersContainer = lazy(() => import("./components/Users/usersContainer"));
+const UsersContainer = lazy(() => import("./components/Users/usersContainer.tsx"));
 
 class App extends Component {
   catchAllUnhandledErrors = (reason, promise) => {
@@ -71,7 +71,7 @@ class App extends Component {
                   element={<ProfileContainer />}
                 ></Route>
                 <Route path="/dialogs/*" element={<DialogsContainer />} />
-                <Route path="/users" element={<UsersContainer />} />
+                <Route path="/users" element={<UsersContainer pageTitle={"Самураи"}/>} />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />

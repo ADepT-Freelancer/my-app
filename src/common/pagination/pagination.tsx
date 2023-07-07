@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import styles from "./Pagination.module.css";
 
-let Pagination = ({
+type PropsType = {
+  currentPage: number;
+  onPageChanged: () => void;
+  totalItemsCount: number;
+  portionSize?: number;
+};
+
+let Pagination: React.FC<PropsType> = ({
+  totalItemsCount,
   currentPage,
   onPageChanged,
-  totalItemsCount,
   portionSize = 10,
 }) => {
   let pagesCount = Math.ceil(totalItemsCount / portionSize);
-  let pages = [];
+  let pages: number[] = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
@@ -16,7 +23,6 @@ let Pagination = ({
   let [portionNumber, setPortionNumber] = useState(1);
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPortionPageNumber = portionNumber * portionSize;
-
   return (
     <div>
       <div className={styles.pagination}>
@@ -48,15 +54,15 @@ let Pagination = ({
               </span>
             );
           })}
-        { (
+        {
           <button
             className={styles.pagination__button}
-             disabled={portionCount === portionNumber  && "disabled"}
+            disabled={portionCount === portionNumber && "disabled"}
             onClick={() => setPortionNumber(portionNumber + 1)}
           >
             NEXT
           </button>
-        )}
+        }
       </div>
     </div>
   );
