@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
-import { profileAPI, usersAPI } from "../api/api";
+import { profileAPI, usersAPI } from "../api/api.ts";
 import { stopSubmit } from "redux-form";
 import {
   ContactsType,

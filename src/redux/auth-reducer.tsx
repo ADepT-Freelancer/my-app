@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import { authAPI, securityAPI } from "../api/api";
+import { ResultCodeEnum, ResultCodeForCaptchaEnum, authAPI, securityAPI } from "../api/api.ts";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "GET_CAPTCHA_URL_SUCCESS";
@@ -54,13 +54,8 @@ export const setAuthUserData = (
   },
 });
 
-
-
-
-
-
 export type GetCaptchaUrlSuccessActionType = {
-  type: typeof GET_CAPTCHA_URL_SUCCESS,
+  type: typeof GET_CAPTCHA_URL_SUCCESS;
   payload: {
     captchaUrl: string;
   };
@@ -73,37 +68,33 @@ export const getCaptchaUrlSuccess = (
   payload: { captchaUrl },
 });
 
-
-
-
-
-
-
-
-
-
 export const getAuthUserData = () => async (dispatch) => {
-  let response = await authAPI.me();
-  if (response.data.resultCode === 0) {
-    let { id, login, email } = response.data.data;
+  let meData = await authAPI.me();
+
+  if (meData.resultCode === ResultCodeEnum.success) {
+    let { id, login, email } = meData.data;
     dispatch(setAuthUserData(id, login, email, true));
   }
 };
 
 export const login =
-  (email: string, password: string, rememberMe: boolean | undefined, captcha: null | undefined) => async (dispatch) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha);
-    if (response.data.resultCode === 0) {
+  (
+    email: string,
+    password: string,
+    rememberMe: boolean | undefined,
+    captcha: null | undefined
+  ) =>
+  async (dispatch) => {
+    let loginData = await authAPI.login(email, password, rememberMe, captcha);
+    if (loginData.resultCode === ResultCodeEnum.success) {
       dispatch(getAuthUserData());
     } else {
-      if (response.data.resultCode === 10) {
+      if (loginData.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
         dispatch(getCaptchaUrl());
       }
 
       let message =
-        response.data.messages.length > 0
-          ? response.data.messages[0]
-          : "Some error";
+        loginData.messages.length > 0 ? loginData.messages[0] : "Some error";
       let action = stopSubmit("loginFormRedux", { _error: message });
       dispatch(action);
     }
@@ -118,7 +109,7 @@ export const getCaptchaUrl = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   let response = await authAPI.logout();
-  if (response.data.resultCode === 0) {
+  if (response.data.resultCode === ResultCodeEnum.success) {
     dispatch(setAuthUserData(null, null, null, false));
   }
 };

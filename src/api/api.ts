@@ -1,4 +1,5 @@
 import axios from "axios";
+import ProfileType from "../types/types";
 
 const instance = axios.create({
   withCredentials: true,
@@ -55,17 +56,54 @@ export const profileAPI = {
       },
     });
   },
-  saveProfileData(profile) {
+  saveProfileData(profile: ProfileType) {
     return instance.put(`profile`, profile);
   },
 };
 
+export enum ResultCodeEnum {
+  success = 0,
+  Error = 1,
+}
+export enum ResultCodeForCaptchaEnum {
+  CaptchaIsRequired = 10,
+}
+
+type LoginMeResponseType = {
+  data: {
+    userId: number;
+  };
+  resultCode: ResultCodeEnum | ResultCodeForCaptchaEnum;
+  messages: string[];
+};
+type MeResponseType = {
+  data: {
+    id: number;
+    email: string;
+    login: string;
+  };
+  resultCode: ResultCodeEnum;
+  messages: string[];
+};
+
 export const authAPI = {
   me() {
-    return instance.get(`auth/me`);
+    return instance.get<MeResponseType>(`auth/me`).then((res) => res.data);
   },
-  login(email, password, rememberMe = false, captcha = null) {
-    return instance.post(`auth/login`, { email, password, rememberMe, captcha });
+  login(
+    email: string,
+    password: string,
+    rememberMe: boolean = false,
+    captcha: string | null = null
+  ) {
+    return instance
+      .post<LoginMeResponseType>(`auth/login`, {
+        email,
+        password,
+        rememberMe,
+        captcha,
+      })
+      .then((res) => res.data);
   },
   logout() {
     return instance.delete(`auth/login`);
