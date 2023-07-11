@@ -3,8 +3,8 @@ import { Field, reduxForm } from "redux-form";
 import Contacts from "./Contacts/Contacts";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { maxLengthCreator, required } from "../../utils/validators/validators";
-import { Textarea } from "../../../common/FormsControls/FormsControls";
+import { maxLengthCreator, required } from "../../utils/validators/validators.ts";
+import { Textarea } from "../../../common/FormsControls/FormsControls.tsx";
 
 const MyPosts = React.memo((props) => {
   let postsElement = props.posts.toReversed().map((p) => (

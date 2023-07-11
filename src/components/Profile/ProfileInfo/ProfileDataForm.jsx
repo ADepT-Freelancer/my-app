@@ -4,7 +4,7 @@ import {
   Input,
   Textarea,
   createField,
-} from "../../../common/FormsControls/FormsControls";
+} from "../../../common/FormsControls/FormsControls.tsx";
 import style from "../../../common/FormsControls/FormsControls.module.css";
 
 

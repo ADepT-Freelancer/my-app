@@ -4,8 +4,8 @@ import { Field, reduxForm } from "redux-form";
 import DialogsItem from "./DialogItem/DialogsItem";
 import s from "./Dialogs.module.css";
 import Message from "./Message/Message";
-import { Textarea } from "../../common/FormsControls/FormsControls";
-import { maxLengthCreator, required } from "../utils/validators/validators";
+import { Textarea } from "../../common/FormsControls/FormsControls.tsx";
+import { maxLengthCreator, required } from "../utils/validators/validators.ts";
 
 const maxLength50 = maxLengthCreator(50);
 

@@ -13,7 +13,7 @@ import { compose } from "redux";
 import "./App.css";
 import Preloader from "./common/preloader/preloader";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/Login";
+import LoginPage from "./components/Login/Login.tsx";
 import Music from "./components/Music/Music";
 // import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
