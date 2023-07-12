@@ -1,4 +1,5 @@
 import {
+  Action,
   applyMiddleware,
   combineReducers,
   compose,
@@ -9,7 +10,7 @@ import dialogsReducer from "./dialogs-reducer.tsx";
 import sidebarReducer from "./sidebar-reducer.ts";
 import usersReducer from "./users-reducer.ts";
 import authReducer from "./auth-reducer.tsx";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, { ThunkAction } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import appReducer from "./app-reducer.ts";
 
@@ -30,8 +31,16 @@ export type PropertiesTypes<T> = T extends { [key: string]: infer U }
   ? U
   : never;
 
-export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> =
-  ReturnType<PropertiesTypes<T>>;
+export type InferActionsTypes<
+  T extends { [key: string]: (...args: any[]) => any }
+> = ReturnType<PropertiesTypes<T>>;
+
+export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
+  R,
+  AppStateType,
+  unknown,
+  A
+>;
 
 // @ts-ignore
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

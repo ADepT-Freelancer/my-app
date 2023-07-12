@@ -1,9 +1,12 @@
 /* eslint-disable eqeqeq */
-import { usersAPI } from "../api/api.ts";
 import { UserType } from "../types/types";
 import { ThunkAction } from "redux-thunk";
 import { AppStateType, InferActionsTypes } from "./redux-store";
 import { Dispatch } from "redux";
+import { usersAPI } from './../api/users-api';
+
+
+
 
 type InitialStateType = {
   users: UserType[];
@@ -111,7 +114,7 @@ export const actions = {
     } as const),
 };
 
-type GetStateType = () => AppStateType;
+export type GetStateType = () => AppStateType;
 export type DispatchType = () => Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<
   Promise<void>,
@@ -135,9 +138,9 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
 export const follow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowingInProgress(true, userId));
-    let response = await usersAPI.follow(userId);
+    let res = await usersAPI.follow(userId);
 
-    if (response.data.resultCode == 0) {
+    if (res.resultCode == 0) {
       dispatch(actions.followSuccess(userId));
     }
     dispatch(actions.toggleFollowingInProgress(false, userId));
@@ -147,9 +150,9 @@ export const follow = (userId: number): ThunkType => {
 export const unfollow = (userId: number): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleFollowingInProgress(true, userId));
-    let response = await usersAPI.unfollow(userId);
+    let res = await usersAPI.unfollow(userId);
 
-    if (response.data.resultCode == 0) {
+    if (res.resultCode == 0) {
       dispatch(actions.unfollowSuccess(userId));
     }
     dispatch(actions.toggleFollowingInProgress(false, userId));

@@ -1,10 +1,10 @@
 import { stopSubmit } from "redux-form";
-import { ResultCodeEnum, ResultCodeForCaptchaEnum, authAPI, securityAPI } from "../api/api.ts";
-import { DispatchType } from "./users-reducer.ts";
+import { ResultCodeEnum, ResultCodeForCaptchaEnum } from "../api/api.ts";
+import { securityAPI } from "./../api/security-api";
+import { authAPI } from "./../api/auth-api";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "GET_CAPTCHA_URL_SUCCESS";
-
 let initialState = {
   userId: null as null | number,
   login: null as null | string,
@@ -29,52 +29,31 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
       return state;
   }
 };
-type SetAuthUserDataPayloadType = {
-  myId: number | null;
-  email: string | null;
-  login: string | null;
-  isAuth: boolean;
-};
-type SetAuthUserDataType = {
-  type: typeof SET_USER_DATA;
-  payload: SetAuthUserDataPayloadType;
-};
 
-export const setAuthUserData = (
-  myId: number | null,
-  email: string | null,
-  login: string | null,
-  isAuth: boolean
-): SetAuthUserDataType => ({
-  type: SET_USER_DATA,
-  payload: {
-    myId,
-    email,
-    login,
-    isAuth,
-  },
-});
-
-export type GetCaptchaUrlSuccessActionType = {
-  type: typeof GET_CAPTCHA_URL_SUCCESS;
-  payload: {
-    captchaUrl: string;
-  };
+export const actions = {
+  setAuthUserData: (
+    myId: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean
+  ) =>
+    ({
+      type: SET_USER_DATA,
+      payload: { myId, email, login, isAuth },
+    } as const),
+  getCaptchaUrlSuccess: (captchaUrl: string) =>
+    ({
+      type: GET_CAPTCHA_URL_SUCCESS,
+      payload: { captchaUrl },
+    } as const),
 };
-
-export const getCaptchaUrlSuccess = (
-  captchaUrl: string
-): GetCaptchaUrlSuccessActionType => ({
-  type: GET_CAPTCHA_URL_SUCCESS,
-  payload: { captchaUrl },
-});
 
 export const getAuthUserData = () => async (dispatch: any) => {
   let meData = await authAPI.me();
 
   if (meData.resultCode === ResultCodeEnum.success) {
     let { id, login, email } = meData.data;
-    dispatch(setAuthUserData(id, login, email, true));
+    dispatch(actions.setAuthUserData(id, login, email, true));
   }
 };
 
@@ -102,16 +81,16 @@ export const login =
   };
 
 export const getCaptchaUrl = () => async (dispatch: any) => {
-  let response = await securityAPI.getCaptchaUrl();
-  const captchaUrl = response.data.url;
+  let res = await securityAPI.getCaptchaUrl();
+  const captchaUrl = res.url;
 
-  dispatch(getCaptchaUrlSuccess(captchaUrl));
+  dispatch(actions.getCaptchaUrlSuccess(captchaUrl));
 };
 
 export const logout = () => async (dispatch: any) => {
-  let response = await authAPI.logout();
-  if (response.data.resultCode === ResultCodeEnum.success) {
-    dispatch(setAuthUserData(null, null, null, false));
+  let res = await authAPI.logout();
+  if (res.data.resultCode === ResultCodeEnum.success) {
+    dispatch(actions.setAuthUserData(null, null, null, false));
   }
 };
 

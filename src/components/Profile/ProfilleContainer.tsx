@@ -11,7 +11,8 @@ import {
   saveProfileData,
   setEditMode,
 } from "../../redux/profile-reducer.ts";
-import Profile from "./Profile";
+import Profile from "./Profile.jsx";
+import { AppStateType } from "../../redux/redux-store.ts";
 
 class ProfileContainer extends React.Component {
   refreshProfile() {
@@ -57,7 +58,7 @@ class ProfileContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType) => ({
   profilePage: state.profilePage,
   status: state.profilePage.status,
   authorizedUserId: state.auth.myId,
