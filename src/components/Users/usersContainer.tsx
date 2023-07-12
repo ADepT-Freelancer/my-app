@@ -2,13 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "../../common/preloader/preloader";
+
+import { UserType } from "../../types/types";
+import { AppStateType } from "../../redux/redux-store.ts";
 import {
+  actions,
   follow,
-  setCurrentPage,
-  toggleFollowingInProgress,
   unfollow,
   getUsers,
-} from "../../redux/users-reducer.ts";
+} from "./../../redux/users-reducer.ts";
+import Users from "./Users.tsx";
 import {
   getCurrentPage,
   getFollowingInProgress,
@@ -16,10 +19,7 @@ import {
   getPageSize,
   getTotalUsersCount,
   getUserState,
-} from "../../redux/users-selectors.ts";
-import Users from "./Users.tsx";
-import { UserType } from "../../types/types";
-import { AppStateType } from "../../redux/redux-store";
+} from "./../../redux/users-selectors.ts";
 
 type MapStatePropsType = {
   currentPage: number;
@@ -29,6 +29,7 @@ type MapStatePropsType = {
   users: UserType[];
   totalUsersCount: number;
 };
+
 type MapDispatchPropsType = {
   onPageChanged: (pageNumber: number) => void;
   setCurrentPage: (pageNumber: number) => void;
@@ -94,6 +95,9 @@ let mapStateToProps = (state: AppStateType) => {
 //     followingInProgress: state.usersPage.followingInProgress,
 //   };
 // };
+let setCurrentPage = actions.setCurrentPage;
+
+let toggleFollowingInProgress = actions.toggleFollowingInProgress;
 
 export default compose(
   // withAuthRedirect,

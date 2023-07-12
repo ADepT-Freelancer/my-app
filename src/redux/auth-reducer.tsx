@@ -1,5 +1,6 @@
 import { stopSubmit } from "redux-form";
 import { ResultCodeEnum, ResultCodeForCaptchaEnum, authAPI, securityAPI } from "../api/api.ts";
+import { DispatchType } from "./users-reducer.ts";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const GET_CAPTCHA_URL_SUCCESS = "GET_CAPTCHA_URL_SUCCESS";
@@ -15,7 +16,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 
-const authReducer = (state = initialState, action): InitialStateType => {
+const authReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_USER_DATA:
     case GET_CAPTCHA_URL_SUCCESS:
@@ -68,7 +69,7 @@ export const getCaptchaUrlSuccess = (
   payload: { captchaUrl },
 });
 
-export const getAuthUserData = () => async (dispatch) => {
+export const getAuthUserData = () => async (dispatch: any) => {
   let meData = await authAPI.me();
 
   if (meData.resultCode === ResultCodeEnum.success) {
@@ -84,7 +85,7 @@ export const login =
     rememberMe: boolean | undefined,
     captcha: null | undefined
   ) =>
-  async (dispatch) => {
+  async (dispatch: any) => {
     let loginData = await authAPI.login(email, password, rememberMe, captcha);
     if (loginData.resultCode === ResultCodeEnum.success) {
       dispatch(getAuthUserData());
@@ -100,14 +101,14 @@ export const login =
     }
   };
 
-export const getCaptchaUrl = () => async (dispatch) => {
+export const getCaptchaUrl = () => async (dispatch: any) => {
   let response = await securityAPI.getCaptchaUrl();
   const captchaUrl = response.data.url;
 
   dispatch(getCaptchaUrlSuccess(captchaUrl));
 };
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch: any) => {
   let response = await authAPI.logout();
   if (response.data.resultCode === ResultCodeEnum.success) {
     dispatch(setAuthUserData(null, null, null, false));
