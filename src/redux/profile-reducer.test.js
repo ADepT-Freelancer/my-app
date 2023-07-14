@@ -1,4 +1,4 @@
-import profileReducer, { addPostActionCreator, deletePost } from "./profile-reducer.ts";
+import profileReducer, { actions } from "./profile-reducer.ts";
 
 let state = {
   posts: [
@@ -48,11 +48,33 @@ let state = {
       likeCount: 45,
     },
   ],
+  profile: {
+    userId: 1,
+    lookingForAJob: true,
+    lookingForAJobDescription: " ",
+    fullName: " ",
+    contacts: {
+      github: " ",
+      vk: " ",
+      facebook: " ",
+      instagram: " ",
+      twitter: " ",
+      website: " ",
+      youtube: " ",
+      mainLink: " ",
+    },
+    photos: {
+      large: null,
+      small: null,
+    },
+  },
+  status: "",
+  isProfileEditMode: false,
 };
 
 it("message of new post shoud be cerrect", () => {
   // 1. test data
-  let action = addPostActionCreator("Artem");
+  let action = actions.addPostActionCreator("Artem");
 
   // 2. action
   let newState = profileReducer(state, action);
@@ -63,7 +85,7 @@ it("message of new post shoud be cerrect", () => {
 
 it("new post should be added", () => {
   // 1. test data
-  let action = addPostActionCreator("Artem");
+  let action = actions.addPostActionCreator("Artem");
 
   // 2. action
   let newState = profileReducer(state, action);
@@ -74,10 +96,10 @@ it("new post should be added", () => {
 
 it("after deleting length of messages should be decrement", () => {
   // 1. test data
-  let action = deletePost(1);
+  let action = actions.deletePost(1);
 
   // 2. action
-  let newState = profileReducer(state, action);  
+  let newState = profileReducer(state, action);
 
   // 3. expectation
   expect(newState.posts.length).toBe(4);

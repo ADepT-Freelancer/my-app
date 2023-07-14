@@ -1,12 +1,8 @@
 /* eslint-disable eqeqeq */
-import { UserType } from "../types/types";
-import { ThunkAction } from "redux-thunk";
-import { AppStateType, InferActionsTypes } from "./redux-store";
 import { Dispatch } from "redux";
-import { usersAPI } from './../api/users-api';
-
-
-
+import { UserType } from "../types/types";
+import { usersAPI } from "./../api/users-api";
+import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
 
 type InitialStateType = {
   users: UserType[];
@@ -84,7 +80,6 @@ const usersReducer = (
   }
 };
 
-export type ActionsTypes = InferActionsTypes<typeof actions>;
 
 export const actions = {
   followSuccess: (userId: number) => ({ type: "FOLLOW", userId } as const),
@@ -113,15 +108,6 @@ export const actions = {
       userId,
     } as const),
 };
-
-export type GetStateType = () => AppStateType;
-export type DispatchType = () => Dispatch<ActionsTypes>;
-type ThunkType = ThunkAction<
-  Promise<void>,
-  AppStateType,
-  unknown,
-  ActionsTypes
->;
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
   return async (dispatch, getState: GetStateType) => {
@@ -160,3 +146,11 @@ export const unfollow = (userId: number): ThunkType => {
 };
 
 export default usersReducer;
+
+
+
+
+export type GetStateType = () => AppStateType;
+export type DispatchType = () => Dispatch<ActionsTypes>;
+export type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsTypes>;

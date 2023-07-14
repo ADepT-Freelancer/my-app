@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import {
-  addPostActionCreator
+  actions
 } from "../../../redux/profile-reducer.ts";
 import MyPosts from "./MyPosts";
 
@@ -14,7 +14,7 @@ let f1 = (state) => {
 let f2 = (dispatch) => {
   return {
     addPost: (newPostBody) => {
-      dispatch(addPostActionCreator(newPostBody));
+      dispatch(actions.addPostActionCreator(newPostBody));
     },
   };
 };

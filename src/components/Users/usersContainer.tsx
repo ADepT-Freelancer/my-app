@@ -7,9 +7,9 @@ import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/redux-store.ts";
 import {
   actions,
+  getUsers,
   follow,
   unfollow,
-  getUsers,
 } from "./../../redux/users-reducer.ts";
 import Users from "./Users.tsx";
 import {
@@ -24,18 +24,18 @@ import {
 type MapStatePropsType = {
   currentPage: number;
   pageSize: number;
-  followingInProgress: number[];
   isFetching: boolean;
-  users: UserType[];
   totalUsersCount: number;
+  users: UserType[];
+  followingInProgress: number[];
 };
 
 type MapDispatchPropsType = {
-  onPageChanged: (pageNumber: number) => void;
-  setCurrentPage: (pageNumber: number) => void;
   getUsers: (pageNumber: number, pageSize: number) => void;
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
+  onPageChanged: (pageNumber: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
 };
 type OwnPropsType = {
   pageTitle: string;
@@ -96,7 +96,6 @@ let mapStateToProps = (state: AppStateType) => {
 //   };
 // };
 let setCurrentPage = actions.setCurrentPage;
-
 let toggleFollowingInProgress = actions.toggleFollowingInProgress;
 
 export default compose(
@@ -104,14 +103,11 @@ export default compose(
 
   //TStateProps = {}, no_dispatch = {}, TOwnProps = {}, State = DefaultState
 
-  connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(
-    mapStateToProps,
-    {
-      follow,
-      unfollow,
-      setCurrentPage,
-      toggleFollowingInProgress,
-      getUsers,
-    }
-  )
+  connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setCurrentPage,
+    toggleFollowingInProgress,
+    getUsers,
+  })
 )(UsersContainer);

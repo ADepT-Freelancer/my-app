@@ -1,7 +1,6 @@
-const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+import { InferActionsTypes } from "./redux-store";
 
-let initialState: InitialStateType = {
+let initialState = {
   messages: [
     { id: 1, message: "Hi" },
     { id: 2, message: "How are you?" },
@@ -20,54 +19,26 @@ let initialState: InitialStateType = {
   ],
 };
 
-type MessagesType = { id: null | number; message: null | string };
+export const actions = {
+  addMessageActionCreator: (newMessageBody: string) => ({
+    type: "SN/DIALOGS/ADD-MESSAGE",
+    newMessageBody,
+  }),
 
-type DialogsType = { id: null | number; name: null | string };
-
-export type InitialStateType = {
-  messages: MessagesType[];
-
-  dialogs: DialogsType[];
+  updateNewMessageTextActionCreator: (text: string) => ({
+    type: "SN/DIALOGS/UPDATE-NEW-MESSAGE-TEXT",
+    newText: text,
+  }),
 };
-let testArray: InitialStateType = {
-  messages: [
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-    { id: 111, message: "123" },
-  ],
-
-  dialogs: [
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-    { id: 111, name: "123" },
-  ],
-};
-
-console.log(testArray.dialogs[1].id);
-
-const dialogsReducer = (state = initialState, action) => {
+let i = 6;
+const dialogsReducer = (state = initialState, action: ActionsType) => {
   switch (action.type) {
-    case ADD_MESSAGE:
+    case "SN/DIALOGS/ADD-MESSAGE":
       return {
         ...state,
         messages: [
           ...state.messages,
-          { id: 6, message: action.newMessageBody },
+          { id: i++, message: action.newMessageBody },
         ],
       };
 
@@ -76,14 +47,7 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addMessageActionCreator = (newMessageBody) => ({
-  type: ADD_MESSAGE,
-  newMessageBody,
-});
-
-export const updateNewMessageTextActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  newText: text,
-});
-
 export default dialogsReducer;
+
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>;

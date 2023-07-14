@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
@@ -9,12 +10,31 @@ import {
   updateStatus,
   savePhotoss,
   saveProfileData,
-  setEditMode,
+  actions,
 } from "../../redux/profile-reducer.ts";
 import Profile from "./Profile.jsx";
 import { AppStateType } from "../../redux/redux-store.ts";
 
-class ProfileContainer extends React.Component {
+type MapStatePropsType = ReturnType<typeof mapStateToProps>;
+
+type MapDispatchPropsType = {
+  getUserProfile: (userId: number) => void;
+  getUserStatus: (userId: string) => void;
+  updateStatus: (userId: string) => void;
+  savePhotoss: (userId: File) => void;
+  saveProfileData: (userId: number) => void;
+  setEditMode: () => void;
+};
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+type PathParamsType = {
+  userId: string;
+};
+
+class ProfileContainer extends React.Component<
+  PropsType & RouteComponentProps<PathParamsType>
+> {
   refreshProfile() {
     let userId = this.props.router.params.userId;
     if (!userId) {
@@ -51,7 +71,6 @@ class ProfileContainer extends React.Component {
           urlPhoto={this.props.urlPhoto}
           savePhoto={this.props.savePhotoss}
           setEditMode={this.props.setEditMode}
-
         />
       </div>
     );
@@ -61,13 +80,13 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state: AppStateType) => ({
   profilePage: state.profilePage,
   status: state.profilePage.status,
-  authorizedUserId: state.auth.myId,
+  authorizedUserId: state.auth.userId,
   isAuth: state.auth.isAuth,
   isProfileEditMode: state.profilePage.isProfileEditMode,
 });
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
+function withRouter(Component: any) {
+  function ComponentWithRouterProp(props: any) {
     let location = useLocation();
     let navigate = useNavigate();
     let params = useParams();
@@ -75,7 +94,7 @@ function withRouter(Component) {
   }
   return ComponentWithRouterProp;
 }
-
+let setEditMode = actions.setEditMode;
 export default compose(
   connect(mapStateToProps, {
     getUserProfile,

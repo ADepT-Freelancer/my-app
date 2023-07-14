@@ -5,30 +5,19 @@ import UserProfile from "./User.tsx";
 import styles from "./users.module.css";
 import { UserType } from "../../types/types";
 
-type PropsType = {
-  currentPage: number;
-  onPageChanged: () => void;
-  totalUsersCount: number;
-  pageSize: number;
-  user: UserType[];
-
-  followingInProgress: number[];
-  unfollow: () => void;
-  follow: () => void;
-  portionSize?: number;
-  users: UserType[];
-};
-
 let Users: React.FC<PropsType> = ({
   currentPage,
   onPageChanged,
   totalUsersCount,
+
   pageSize,
   user,
   followingInProgress,
+
   unfollow,
   follow,
   users,
+
   ...props
 }) => {
   // let pagesCount = Math.ceil(totalUsersCount / pageSize);
@@ -62,3 +51,20 @@ let Users: React.FC<PropsType> = ({
 };
 
 export default Users;
+
+type PropsType = {
+  isFetching: boolean;
+  totalUsersCount: number;
+  pageSize: number;
+  onPageChanged: (pageNumber: number) => void;
+
+  users: UserType[];
+  unfollow: (userId: number) => void;
+  follow: (userId: number) => void;
+
+  followingInProgress: number[];
+
+  currentPage: number;
+  // user: UserType[];
+  portionSize?: number;
+};
