@@ -29,7 +29,7 @@ const Post: React.FC<PropsType> = (props) => {
           >
             {props.textButton}
           </a>
-          <a href={props.link || " "} className="item-portfolio__link _icon-link" />
+          <a  href={props.link || " "} className="item-portfolio__link _icon-link" />
         </div>
       </div>
     </article>

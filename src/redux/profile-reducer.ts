@@ -45,27 +45,29 @@ let initialState = {
       likeCount: 5,
     },
   ],
-  profile: {
-    userId: 1,
-    lookingForAJob: true,
-    lookingForAJobDescription: " ",
-    fullName: " ",
-    contacts: {
-      github: " ",
-      vk: " ",
-      facebook: " ",
-      instagram: " ",
-      twitter: " ",
-      website: " ",
-      youtube: " ",
-      mainLink: " ",
-    },
-    aboutMe: "",
-    photos: {
-      large: null,
-      small: null,
-    },
-  },
+  // profile: {
+  //   userId: 1,
+  //   lookingForAJob: true,
+  //   lookingForAJobDescription: " ",
+  //   fullName: " ",
+  //   contacts: {
+  //     github: " ",
+  //     vk: " ",
+  //     facebook: " ",
+  //     instagram: " ",
+  //     twitter: " ",
+  //     website: " ",
+  //     youtube: " ",
+  //     mainLink: " ",
+  //   },
+  //   aboutMe: "",
+  //   photos: {
+  //     large: null,
+  //     small: null,
+  //   },
+  // },
+ 
+  profile: null as ProfileType | null,
   status: "",
   isProfileEditMode: false,
 };
@@ -221,7 +223,7 @@ export const saveProfileData =
     const userId = getState().auth.userId;
     const res = await profileAPI.saveProfileData(profile);
     if (res.resultCode === 0) {
-      dispatch(getUserProfile(userId));
+      dispatch(getUserProfile(userId || 2));
     } else {
       dispatch(stopSubmit("editProfile", { _error: res.messages[0] }));
       return Promise.reject(res.messages[0]);

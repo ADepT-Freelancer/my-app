@@ -15,7 +15,6 @@ export type ContactsType = {
   website: string | null;
   youtube: string | null;
   mainLink: string | null;
-  
 };
 export type ProfileType = {
   userId: number | null;

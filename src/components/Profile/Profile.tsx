@@ -7,12 +7,11 @@ import { ProfileType } from "../../types/types";
 
 type PropsType = {
   profilePage: InitialStateType;
-  isProfileEditMode: boolean;
-
   saveProfileData: (formData: ProfileType) => void;
   updateStatus: (status: string) => void;
   isOwner: boolean;
   savePhoto: (file: File) => void;
+  isProfileEditMode: boolean;
   setEditMode: () => void;
   status: String;
 };

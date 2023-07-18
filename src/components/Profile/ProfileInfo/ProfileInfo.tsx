@@ -7,6 +7,7 @@ import ProfileFormDataSubmit from "./ProfileDataForm";
 import ProfileStatusWithHocks from "./ProfileStatusWithHocks";
 import { InitialStateType } from "../../../redux/profile-reducer";
 import { ProfileType } from "../../../types/types";
+import { strict } from "assert";
 
 type PropsType = {
   profilePage: InitialStateType;
@@ -17,7 +18,7 @@ type PropsType = {
   isOwner: boolean;
   savePhoto: (file: File) => void;
   setEditMode: () => void;
-  status: String;
+  status: string;
 
 };
 
@@ -73,25 +74,25 @@ const SocialNetworks: React.FC<SocialNetworksType> = ({ profile }) => {
     <ul className="main-section__social social">
       <li className="social__item">
         <a
-          href={profile.contacts.instagram}
+          href={profile.contacts.instagram || " " }
           className="social__link _icon-s-instagram"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.github}
+          href={profile.contacts.github || " " }
           className="social__link _icon-s-git"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.twitter}
+          href={profile.contacts.twitter || " " }
           className="social__link _icon-s-twitter"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.mainLink}
+          href={profile.contacts.mainLink || " " }
           className="social__link _icon-s-linkedin"
         />
       </li>
@@ -142,7 +143,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
       <div className="profile__contacts contacts ">
         <b>Contacts:</b>
         <div className="contacts__items">
-          {Object.keys(profile.contacts).map((key) => {
+          {Object.keys(profile.contacts).map((key: string) => {
             return (
               <ContactProfile
                 key={key}
@@ -156,6 +157,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
     </div>
   );
 };
+
 
 type ContactProfileType = {
   contactTitle: string;
@@ -184,7 +186,7 @@ const UsersPhoto: React.FC<UsersPhotoType> = ({
   isOwner,
 }) => {
   const onMainPhotoSelector = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files!.length) {
+    if (e.target.files?.length) {
       savePhoto(e.target.files[0]);
     }
   };
@@ -195,13 +197,13 @@ const UsersPhoto: React.FC<UsersPhotoType> = ({
           <div className="decor-main-section__image">
             <img
               className="decor-main-section__picture"
-              src={profilePage.profile.photos.large || userPhoto}
+              src={profilePage.profile?.photos.large || userPhoto}
               alt="AvatarProfile"
             />
           </div>
         </div>
       </div>
-      {isOwner && <input type={"file"} onChange={onMainPhotoSelector} />}
+      {isOwner && <input placeholder=" - - - " type={"file"} onChange={onMainPhotoSelector} />}
     </div>
   );
 };

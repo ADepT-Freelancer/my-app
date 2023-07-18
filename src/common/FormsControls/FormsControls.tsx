@@ -43,7 +43,7 @@ export const Input = (props: any) => {
 };
 
 export function createField<FormKeysType extends string>(
-  placeholder: string | undefined,
+  placeholder: string | null,
   name: FormKeysType,
   validators: FieldValidatorType[],
   component: React.FC<WrappedFieldProps>,
