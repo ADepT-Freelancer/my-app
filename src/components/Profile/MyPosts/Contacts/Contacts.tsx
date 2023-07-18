@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
-const Contacts = (props) => {
+type PropsType = {};
+const Contacts: React.FC<PropsType> = (props) => {
   return (
     <section className="page__contacts contacts">
       <div className="contacts__container">

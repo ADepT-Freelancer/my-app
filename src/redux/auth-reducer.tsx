@@ -62,7 +62,7 @@ export const login =
     email: string,
     password: string,
     rememberMe: boolean | undefined,
-    captcha: null | undefined
+    captcha: string | null
   ) =>
   async (dispatch: any) => {
     let loginData = await authAPI.login(email, password, rememberMe, captcha);

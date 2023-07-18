@@ -15,9 +15,7 @@ import {
 import Profile from "./Profile.tsx";
 import { AppStateType } from "../../redux/redux-store.ts";
 import { ProfileType } from "../../types/types.ts";
-import { RouteComponentProps } from 'react-router-dom';
-
-
+import { RouteComponentProps } from "react-router-dom";
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 
@@ -26,7 +24,7 @@ type MapDispatchPropsType = {
   getUserStatus: (userId: number) => void;
   updateStatus: (text: string) => void;
   savePhotoss: (file: File) => void;
-  saveProfileData: (profile: ProfileType) => void;
+  saveProfileData: (profile: ProfileType) => Promise<any>;
   setEditMode: () => void;
 };
 

@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
-const ProfileStatusWithHocks = (props) => {
+type PropsType = {
+  status: string;
+  updateStatus: (status: string) => void;
+};
+
+const ProfileStatusWithHocks: React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 
@@ -16,7 +21,7 @@ const ProfileStatusWithHocks = (props) => {
     props.updateStatus(status);
   };
 
-  const onStatusChange = (e) => {
+  const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value);
   };
 
@@ -30,6 +35,7 @@ const ProfileStatusWithHocks = (props) => {
       {editMode && (
         <div>
           <input
+          placeholder="  - - - - - "
             onChange={onStatusChange}
             autoFocus={true}
             onBlur={deActivateMode}

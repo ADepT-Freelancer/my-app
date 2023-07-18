@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
-import userPhoto from "../../../assets/images/user.jpg";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
-const ProfilePhotosWithHocks = (props) => {
+type PropsProfilePhotosWithHocksType = {
+  urlPhoto: string;
+  updateUrlPhoto: (urlPhotoLocal: string) => void;
+};
+
+const ProfilePhotosWithHocks: React.FC<PropsProfilePhotosWithHocksType> = (
+  props
+) => {
   let [editMode, setEditMode] = useState(true);
   let [urlPhotoLocal, setUrlPhotoLocal] = useState(props.urlPhoto);
 
@@ -17,7 +23,7 @@ const ProfilePhotosWithHocks = (props) => {
     props.updateUrlPhoto(urlPhotoLocal);
   };
 
-  const onPhotosChange = (e) => {
+  const onPhotosChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setUrlPhotoLocal(e.currentTarget.value);
   };
 
@@ -26,6 +32,7 @@ const ProfilePhotosWithHocks = (props) => {
       {editMode && (
         <div>
           <textarea
+            placeholder=" - - - "
             onChange={onPhotosChange}
             autoFocus={true}
             onBlur={deActivateMode}
@@ -38,7 +45,7 @@ const ProfilePhotosWithHocks = (props) => {
         <div onDoubleClick={activateMode}>
           <img
             className="profile__avatar decor-main-section__picture "
-            src={props.urlPhoto }
+            src={props.urlPhoto}
             alt="AvatarProfile"
           />
         </div>

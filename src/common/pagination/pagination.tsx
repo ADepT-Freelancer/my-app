@@ -29,7 +29,7 @@ let Pagination: React.FC<PropsType> = ({
         {
           <button
             className={styles.pagination__button}
-            disabled={portionNumber <= 1 && "disabled"}
+            disabled={portionNumber as number <= 1 && true}
             onClick={() => {
               setPortionNumber(portionNumber - 1);
             }}
@@ -57,7 +57,7 @@ let Pagination: React.FC<PropsType> = ({
         {
           <button
             className={styles.pagination__button}
-            disabled={portionCount === portionNumber && "disabled"}
+            disabled={portionCount === portionNumber && true}
             onClick={() => setPortionNumber(portionNumber + 1)}
           >
             NEXT
