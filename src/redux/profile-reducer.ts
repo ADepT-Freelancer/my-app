@@ -60,6 +60,7 @@ let initialState = {
       youtube: " ",
       mainLink: " ",
     },
+    aboutMe: "",
     photos: {
       large: null,
       small: null,

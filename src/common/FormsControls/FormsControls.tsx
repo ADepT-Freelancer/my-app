@@ -25,7 +25,7 @@ export const FormControl: React.FC<FormControlPropsType> = ({
     </div>
   );
 };
-export const Textarea = (props) => {
+export const Textarea = (props: any) => {
   const { input, meta, child, ...restProps } = props;
   return (
     <FormControl {...props}>
@@ -33,7 +33,7 @@ export const Textarea = (props) => {
     </FormControl>
   );
 };
-export const Input = (props) => {
+export const Input = (props: any) => {
   const { input, meta, child, ...restProps } = props;
   return (
     <FormControl {...props}>
@@ -63,3 +63,5 @@ export function createField<FormKeysType extends string>(
     </div>
   );
 }
+
+export type GetStringKeys<T> = Extract<keyof T, string>;

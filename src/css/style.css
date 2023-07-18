@@ -150,9 +150,6 @@ h6 {
   min-width: 0;
 }
 
-
-
-
 /*
 (i) Стили будут применяться ко 
 всем классам содержащим *__container
@@ -313,15 +310,12 @@ h6 {
   object-fit: contain;
 }
 
-
 .common__button {
   border-radius: 0.3rem;
   background-color: #7e74f1;
   padding: 0.1rem 0.3rem;
   cursor: pointer;
-
 }
-
 
 .title__label {
   text-transform: uppercase;
@@ -2682,4 +2676,11 @@ textarea.form__input {
   .item-portfolio__image-ibg {
     opacity: 1;
   }
+}
+
+.users__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  row-gap: 1rem;
+  column-gap: 0.5rem;
 }

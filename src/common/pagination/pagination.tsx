@@ -3,7 +3,7 @@ import styles from "./Pagination.module.css";
 
 type PropsType = {
   currentPage: number;
-  onPageChanged: () => void;
+  onPageChanged: (pageNumber: number) => void;
   totalItemsCount: number;
   portionSize?: number;
 };

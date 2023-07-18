@@ -34,11 +34,11 @@ type MapDispatchPropsType = {
   getUsers: (pageNumber: number, pageSize: number) => void;
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
-  onPageChanged: (pageNumber: number) => void;
   setCurrentPage: (pageNumber: number) => void;
 };
 type OwnPropsType = {
   pageTitle: string;
+  
 };
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;

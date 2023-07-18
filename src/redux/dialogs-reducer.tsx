@@ -20,15 +20,15 @@ let initialState = {
 };
 
 export const actions = {
-  addMessageActionCreator: (newMessageBody: string) => ({
+  addMessage: (newMessageBody: string) => ({
     type: "SN/DIALOGS/ADD-MESSAGE",
     newMessageBody,
   }),
 
-  updateNewMessageTextActionCreator: (text: string) => ({
-    type: "SN/DIALOGS/UPDATE-NEW-MESSAGE-TEXT",
-    newText: text,
-  }),
+  // updateNewMessageTextActionCreator: (text: string) => ({
+  //   type: "SN/DIALOGS/UPDATE-NEW-MESSAGE-TEXT",
+  //   newText: text,
+  // }),
 };
 let i = 6;
 const dialogsReducer = (state = initialState, action: ActionsType) => {

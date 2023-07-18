@@ -3,7 +3,6 @@ import { ResponseTypeAPI, instance } from "./api";
 
 export const profileAPI = {
   getUserProfile(userId: number) {
-    debugger;
     return instance
       .get<ProfileType>(`profile/${userId}`)
       .then((res) => res.data);

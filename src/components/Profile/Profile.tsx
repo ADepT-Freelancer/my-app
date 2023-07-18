@@ -2,22 +2,32 @@ import React from "react";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import { InitialStateType } from "../../redux/profile-reducer";
+import { ProfileType } from "../../types/types";
 
-const Profile = (props) => {
+type PropsType = {
+  profilePage: InitialStateType;
+  isProfileEditMode: boolean;
+
+  saveProfileData: (formData: ProfileType) => void;
+  updateStatus: (status: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: File) => void;
+  setEditMode: () => void;
+  status: String;
+};
+const Profile: React.FC<PropsType> = (props) => {
   return (
     <main className={s.profile__main}>
       <ProfileInfo
         saveProfileData={props.saveProfileData}
         profilePage={props.profilePage}
-        contacts={props.contacts}
         updateStatus={props.updateStatus}
-        status={props.status}
-        urlPhoto={props.urlPhoto}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}
         isProfileEditMode={props.isProfileEditMode}
         setEditMode={props.setEditMode}
-
+        status={props.status}
       />
       <MyPostsContainer />
     </main>

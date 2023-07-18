@@ -1,15 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React from "react";
+import React, { ChangeEvent } from "react";
 import userPhoto from "../../../assets/images/user.jpg";
-import Preloader from "./../../../common/preloader/preloader";
+import Preloader from "../../../common/preloader/preloader";
 import ProfileFormDataSubmit from "./ProfileDataForm";
 import ProfileStatusWithHocks from "./ProfileStatusWithHocks";
+import { InitialStateType } from "../../../redux/profile-reducer";
+import { ProfileType } from "../../../types/types";
 
-const ProfileInfo = (props) => {
+type PropsType = {
+  profilePage: InitialStateType;
+  isProfileEditMode: boolean;
+
+  saveProfileData: (formData: ProfileType) => void;
+  updateStatus: (status: string) => void;
+  isOwner: boolean;
+  savePhoto: (file: File) => void;
+  setEditMode: () => void;
+  status: String;
+
+};
+
+const ProfileInfo: React.FC<PropsType> = (props) => {
   // let [isEditMode, setEditMode] = useState(false);
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: ProfileType) => {
     props.saveProfileData(formData);
   };
 
@@ -30,14 +45,13 @@ const ProfileInfo = (props) => {
             profilePage={props.profilePage}
             isOwner={props.isOwner}
             savePhoto={props.savePhoto}
-            profile={props.profilePage.profile}
           />
           {props.isProfileEditMode ? (
             <ProfileFormDataSubmit
               onSubmit={onSubmit}
               initialValues={props.profilePage.profile}
               profile={props.profilePage.profile}
-              status={props.status}
+              status={props.profilePage.status}
             />
           ) : (
             <ProfileData
@@ -51,8 +65,10 @@ const ProfileInfo = (props) => {
     </section>
   );
 };
-
-const SocialNetworks = ({ profile }) => {
+type SocialNetworksType = {
+  profile: ProfileType;
+};
+const SocialNetworks: React.FC<SocialNetworksType> = ({ profile }) => {
   return (
     <ul className="main-section__social social">
       <li className="social__item">
@@ -82,7 +98,21 @@ const SocialNetworks = ({ profile }) => {
     </ul>
   );
 };
-const ProfileData = ({ profile, isOwner, setEditMode }) => {
+
+type ProfileDataPropsType = {
+  profile: ProfileType;
+  isOwner: boolean;
+  setEditMode: () => void;
+};
+
+const ProfileData: React.FC<ProfileDataPropsType> = ({
+  profile,
+  isOwner,
+  setEditMode,
+}) => {
+  const a = profile.userId;
+  alert(a);
+
   return (
     <div>
       {isOwner && (
@@ -126,17 +156,35 @@ const ProfileData = ({ profile, isOwner, setEditMode }) => {
     </div>
   );
 };
-const ContactProfile = ({ contactTitle, contactValue }) => {
+
+type ContactProfileType = {
+  contactTitle: string;
+  contactValue: string;
+};
+const ContactProfile: React.FC<ContactProfileType> = ({
+  contactTitle,
+  contactValue,
+}) => {
   return (
     <div>
       <b>{contactTitle}</b>: {contactValue}
     </div>
   );
 };
-const UsersPhoto = ({ profilePage, savePhoto, isOwner, }) => {
-  
-  const onMainPhotoSelector = (e) => {
-    if (e.target.files.length) {
+
+type UsersPhotoType = {
+  profilePage: InitialStateType;
+  savePhoto: (file: File) => void;
+  isOwner: boolean;
+};
+
+const UsersPhoto: React.FC<UsersPhotoType> = ({
+  profilePage,
+  savePhoto,
+  isOwner,
+}) => {
+  const onMainPhotoSelector = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files!.length) {
       savePhoto(e.target.files[0]);
     }
   };
@@ -157,7 +205,12 @@ const UsersPhoto = ({ profilePage, savePhoto, isOwner, }) => {
     </div>
   );
 };
-const UserFullName = ({ profile }) => {
+
+type UserFullNameType = {
+  profile: ProfileType;
+};
+
+const UserFullName: React.FC<UserFullNameType> = ({ profile }) => {
   return (
     <div className="main-section__title title">
       <div className="title__label">MY NAME IS</div>

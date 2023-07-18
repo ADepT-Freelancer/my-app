@@ -15,6 +15,7 @@ export type ContactsType = {
   website: string | null;
   youtube: string | null;
   mainLink: string | null;
+  
 };
 export type ProfileType = {
   userId: number | null;
@@ -23,7 +24,7 @@ export type ProfileType = {
   fullName: string | null;
   contacts: ContactsType;
   photos: PhotosType;
-
+  aboutMe: string | null;
 };
 export type PhotosType = {
   small: string | null;

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
 import {
+  GetStringKeys,
   Input,
   createField,
 } from "../../common/FormsControls/FormsControls.tsx";
@@ -16,20 +17,14 @@ type LoginFormOwmProps = {
   captchaUrl: number;
 };
 
-
-
-
-  
-
-
-type LoginFormValuesType = {
+export type LoginFormValuesType = {
   email: string;
   password: string;
   rememberMe: boolean;
   captcha: string;
 };
 
-type LoginFormsValuesTypeKeys = Extract<keyof LoginFormValuesType, string>;
+type LoginFormsValuesTypeKeys = GetStringKeys<LoginFormValuesType>;
 
 const LoginForm: React.FC<
   InjectedFormProps<LoginFormValuesType, LoginFormOwmProps> & LoginFormOwmProps

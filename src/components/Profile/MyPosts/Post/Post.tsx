@@ -1,8 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
 
+type PropsType = {
+  link: string;
+  photo: string;
+  title: string;
+  textButton: string;
+  likeCounter: number;
+  id: number;
+};
 
-const Post = (props) => {
+const Post: React.FC<PropsType> = (props) => {
   return (
     <article className="item-portfolio">
       <a href={props.link} className="item-portfolio__image-ibg">

@@ -23,9 +23,3 @@
 	display: grid;
   grid-template-columns: repeat(auto-fill, minmax(2.5rem, auto));
 }
-.users__items {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
-  row-gap: 1rem;
-	column-gap: 0.5rem;
-}

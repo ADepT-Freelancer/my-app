@@ -2,7 +2,6 @@
 import React from "react";
 import Pagination from "../../common/pagination/pagination.tsx";
 import UserProfile from "./User.tsx";
-import styles from "./users.module.css";
 import { UserType } from "../../types/types";
 
 let Users: React.FC<PropsType> = ({
@@ -11,7 +10,7 @@ let Users: React.FC<PropsType> = ({
   totalUsersCount,
 
   pageSize,
-  user,
+  // user,
   followingInProgress,
 
   unfollow,
@@ -35,7 +34,7 @@ let Users: React.FC<PropsType> = ({
         totalItemsCount={totalUsersCount}
       />
 
-      <div className={styles.users__items}>
+      <div className="users__items">
         {users.map((user: UserType) => (
           <UserProfile
             key={user.id}
