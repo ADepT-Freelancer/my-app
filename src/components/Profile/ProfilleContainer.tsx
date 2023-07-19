@@ -42,7 +42,7 @@ class ProfileContainer extends React.Component<PropsType> {
   refreshProfile() {
     let userId: number | null = +this.props.router.params.userId;
     if (!userId) {
-      userId = this.props.authorizedUserId;
+      userId = this.props.authorizedUserId
       if (!userId) {
         // сюди не попадаю
         <Navigate to="/users" />;

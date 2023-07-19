@@ -1,6 +1,8 @@
 # Custom Dictionary Words
+globalstate
 Photoss
 Виправлення
 помилок
 попадаю
 сюди
+ 

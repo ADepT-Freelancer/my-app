@@ -11,9 +11,8 @@ let initialState = {
   isFetching: true,
   isAuth: false,
   captchaUrl: null as null | string, //if null , then captcha is not required
-  authorizedUserId: null as null | string
 };
-
+ 
 const authReducer = (
   state = initialState,
   action: ActionsTypes
@@ -33,14 +32,14 @@ const authReducer = (
 
 export const actions = {
   setAuthUserData: (
-    myId: number | null,
+    userId: number | null,
     email: string | null,
     login: string | null,
     isAuth: boolean
   ) =>
     ({
       type: "SN/AUTH/SET_USER_DATA",
-      payload: { myId, email, login, isAuth },
+      payload: { userId, email, login, isAuth },
     } as const),
   getCaptchaUrlSuccess: (captchaUrl: string) =>
     ({
