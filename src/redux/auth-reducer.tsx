@@ -11,6 +11,7 @@ let initialState = {
   isFetching: true,
   isAuth: false,
   captchaUrl: null as null | string, //if null , then captcha is not required
+  authorizedUserId: null as null | string
 };
 
 const authReducer = (
