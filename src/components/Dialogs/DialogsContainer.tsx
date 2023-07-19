@@ -12,10 +12,9 @@ let mapStateToProps = (state: AppStateType) => {
   };
 };
 
-const addMessage = actions.addMessage;
 export default compose<React.ComponentType>(
   connect<MapPropsType, DispatchPropsType, {}, AppStateType>(mapStateToProps, {
-    addMessage,
+    ...actions,
   }),
   withAuthRedirect
 )(Dialogs);
