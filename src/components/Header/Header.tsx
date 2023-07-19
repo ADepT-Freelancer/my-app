@@ -3,7 +3,18 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "../Navbar/Navbar.module.css";
 
-const Header = (props) => {
+export type MapPropsType = {
+  isAuth: boolean;
+  login: string | null;
+};
+
+export type DispatchPropsType = {
+  logout: () => void;
+};
+
+export type PropsType = MapPropsType & DispatchPropsType;
+
+const Header: React.FC<PropsType> = (props) => {
   let [isMenuOpen, setMenuOpen] = useState(false);
 
   let menuOpen = () => {
@@ -20,15 +31,13 @@ const Header = (props) => {
   return (
     <header className="header">
       <div className="header__container">
-        <NavLink
-          to="/profile"
-        >
+        <NavLink to="/profile">
           <a href="#" className="header__logo">
             <img src="./favicon.ico" alt="Logo" />
           </a>
         </NavLink>
 
-        <div class={isMenuOpen && "menu-open"}>
+        <div className={(isMenuOpen && "menu-open") || " "}>
           <nav className=" menu__body">
             <ul>
               <li className={s.item}>
@@ -106,7 +115,11 @@ const Header = (props) => {
                 </NavLink>
               </li>
               <li>
-                <button className="header__button" onClick={props.logout}>
+                <button
+                  title="header__button"
+                  className="header__button"
+                  onClick={props.logout}
+                >
                   Log out
                 </button>
               </li>
@@ -114,8 +127,9 @@ const Header = (props) => {
           </nav>
         </div>
 
-        <div className={isMenuOpen && "menu-open "}>
+        <div className={(isMenuOpen && "menu-open") || " "}>
           <button
+            title="menu__button"
             type="button"
             onClick={menuOpen}
             onBlur={menuClose}

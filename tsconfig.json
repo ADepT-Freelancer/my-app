@@ -26,6 +26,7 @@
     "src/**/*.module.css",
     "src/**/*.css",
     "src/**/*..jpg",
+    "src/**/*..svg",
     "tests/**/*.ts"
   ]
 }

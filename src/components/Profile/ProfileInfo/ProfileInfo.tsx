@@ -3,11 +3,10 @@
 import React, { ChangeEvent } from "react";
 import userPhoto from "../../../assets/images/user.jpg";
 import Preloader from "../../../common/preloader/preloader";
-import ProfileFormDataSubmit from "./ProfileDataForm";
-import ProfileStatusWithHocks from "./ProfileStatusWithHocks";
 import { InitialStateType } from "../../../redux/profile-reducer";
-import { ProfileType } from "../../../types/types";
-import { strict } from "assert";
+import { ContactsType, ProfileType } from "../../../types/types";
+import ProfileFormDataSubmit from "./ProfileDataForm.tsx";
+import ProfileStatusWithHocks from "./ProfileStatusWithHocks";
 
 type PropsType = {
   profilePage: InitialStateType;
@@ -19,7 +18,6 @@ type PropsType = {
   savePhoto: (file: File) => void;
   setEditMode: () => void;
   status: string;
-
 };
 
 const ProfileInfo: React.FC<PropsType> = (props) => {
@@ -52,7 +50,7 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
               onSubmit={onSubmit}
               initialValues={props.profilePage.profile}
               profile={props.profilePage.profile}
-              status={props.profilePage.status}
+              // status={props.profilePage.status}
             />
           ) : (
             <ProfileData
@@ -74,25 +72,25 @@ const SocialNetworks: React.FC<SocialNetworksType> = ({ profile }) => {
     <ul className="main-section__social social">
       <li className="social__item">
         <a
-          href={profile.contacts.instagram || " " }
+          href={profile.contacts.instagram || " "}
           className="social__link _icon-s-instagram"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.github || " " }
+          href={profile.contacts.github || " "}
           className="social__link _icon-s-git"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.twitter || " " }
+          href={profile.contacts.twitter || " "}
           className="social__link _icon-s-twitter"
         />
       </li>
       <li className="social__item">
         <a
-          href={profile.contacts.mainLink || " " }
+          href={profile.contacts.mainLink || " "}
           className="social__link _icon-s-linkedin"
         />
       </li>
@@ -111,9 +109,6 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
   isOwner,
   setEditMode,
 }) => {
-  const a = profile.userId;
-  alert(a);
-
   return (
     <div>
       {isOwner && (
@@ -143,12 +138,12 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
       <div className="profile__contacts contacts ">
         <b>Contacts:</b>
         <div className="contacts__items">
-          {Object.keys(profile.contacts).map((key: string) => {
+          {Object.keys(profile.contacts).map((key) => {
             return (
               <ContactProfile
                 key={key}
                 contactTitle={key}
-                contactValue={profile.contacts[key]}
+                contactValue={profile.contacts[key as keyof ContactsType]}
               />
             );
           })}
@@ -158,10 +153,9 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({
   );
 };
 
-
 type ContactProfileType = {
   contactTitle: string;
-  contactValue: string;
+  contactValue: string | null;
 };
 const ContactProfile: React.FC<ContactProfileType> = ({
   contactTitle,
@@ -203,7 +197,13 @@ const UsersPhoto: React.FC<UsersPhotoType> = ({
           </div>
         </div>
       </div>
-      {isOwner && <input placeholder=" - - - " type={"file"} onChange={onMainPhotoSelector} />}
+      {isOwner && (
+        <input
+          placeholder=" - - - "
+          type={"file"}
+          onChange={onMainPhotoSelector}
+        />
+      )}
     </div>
   );
 };

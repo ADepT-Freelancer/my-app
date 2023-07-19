@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
@@ -15,7 +19,7 @@ import {
 import Profile from "./Profile.tsx";
 import { AppStateType } from "../../redux/redux-store.ts";
 import { ProfileType } from "../../types/types.ts";
-import { RouteComponentProps } from "react-router-dom";
+// import { RouteComponentProps } from "react-router-dom";
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 
@@ -28,13 +32,11 @@ type MapDispatchPropsType = {
   setEditMode: () => void;
 };
 
-type PropsType = MapStatePropsType &
-  MapDispatchPropsType &
-  RouteComponentProps<PathParamsType>;
+type PropsType = MapStatePropsType & MapDispatchPropsType & any; // &   RouteComponentProps<PathParamsType>;;
 
-type PathParamsType = {
-  userId: string;
-};
+// type PathParamsType = {
+//   userId: string;
+// };
 
 class ProfileContainer extends React.Component<PropsType> {
   refreshProfile() {
@@ -43,7 +45,8 @@ class ProfileContainer extends React.Component<PropsType> {
       userId = this.props.authorizedUserId;
       if (!userId) {
         // сюди не попадаю
-        this.props.history.push("/users");
+        <Navigate to="/users" />;
+        // this.props.history.push("/users");
       }
     }
 
@@ -53,7 +56,7 @@ class ProfileContainer extends React.Component<PropsType> {
       );
     } else {
       this.props.getUserProfile(userId);
-      this.props.getState(userId);
+      // this.props.getState(userId);
     }
     this.props.getUserProfile(userId as number);
     this.props.getUserStatus(userId as number);

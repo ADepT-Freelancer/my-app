@@ -1,10 +1,8 @@
 import React from "react";
 import s from "./Dialogs.module.css";
-import DialogsItem from "./DialogItem/DialogsItem.jsx";
-import Message from "./Message/Message.jsx";
+import DialogsItem from "./DialogItem/DialogsItem.tsx";
+import Message from "./Message/Message.tsx";
 import { InitialStateType } from "../../redux/dialogs-reducer.tsx";
-
-
 import { InjectedFormProps, reduxForm } from "redux-form";
 import {
   Textarea,
@@ -14,10 +12,8 @@ import { maxLengthCreator, required } from "../utils/validators/validators.ts";
 
 const maxLength50 = maxLengthCreator(50);
 
-const Dialogs: React.FC<PropsType> = (props) => {
-  debugger;
-  
-  let state = props.dialogsPage;
+const Dialogs: React.FC<PropsType> = ({ addMessage, dialogsPage }) => {
+  let state = dialogsPage;
   let dialogsElements = state.dialogs.map((d) => (
     <DialogsItem key={d.id} name={d.name} id={d.id} />
   ));
@@ -25,7 +21,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
     <Message key={m.id} message={m.message} />
   ));
   let addNewMessage = (values: NewMessageFormValuesType) => {
-    props.addMessage(values.newMessageBody);
+    addMessage(values.newMessageBody);
   };
 
   return (
@@ -66,10 +62,15 @@ const MessageReduxForm = reduxForm<NewMessageFormValuesType>({
 
 export default Dialogs;
 
-type PropsType = {
+export type MapPropsType = {
   dialogsPage: InitialStateType;
+};
+
+export type DispatchPropsType = {
   addMessage: (newMessageBody: string) => void;
 };
+
+export type PropsType = MapPropsType & DispatchPropsType;
 
 export type NewMessageFormValuesType = {
   newMessageBody: string;

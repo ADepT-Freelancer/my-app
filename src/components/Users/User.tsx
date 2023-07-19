@@ -6,22 +6,24 @@ import styles from "./users.module.css";
 import { UserType } from "../../types/types";
 
 type MapStatePropsType = {
-  currentPage: number;
-  pageSize: number;
-  isFetching: boolean;
-  totalUsersCount: number;
+  // currentPage: number;
+  // pageSize: number;
+  // isFetching: boolean;
+  // totalUsersCount: number;
   user: UserType;
   followingInProgress: number[];
 };
 
 type MapDispatchPropsType = {
-  getUsers: (pageNumber: number, pageSize: number) => void;
+  // getUsers: (pageNumber: number, pageSize: number) => void;
+  // setCurrentPage: (pageNumber: number) => void;
+
+
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
-  setCurrentPage: (pageNumber: number) => void;
 };
 type OwnPropsType = {
-  pageTitle: string;
+  // pageTitle: string;
 };
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;

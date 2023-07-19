@@ -37,6 +37,16 @@ const MyPosts: React.FC<MapPropsPostType & DispatchPropsPostType> = (props) => {
       />
     ));
 
+  // ================================================================================
+
+  type PropsType = {};
+
+  type AddPostFormValueType = {
+    newPostBody: string;
+  };
+
+  type AddPostFormValueTypeKeys = GetStringKeys<AddPostFormValueType>;
+
   const maxLength30 = maxLengthCreator(30);
   const AddPostForm: React.FC<
     InjectedFormProps<AddPostFormValueType, PropsType> & PropsType
@@ -59,7 +69,9 @@ const MyPosts: React.FC<MapPropsPostType & DispatchPropsPostType> = (props) => {
     );
   };
 
-  const PostReduxForm = reduxForm({ form: "AddPostFormRedux" })(AddPostForm);
+  const PostReduxForm = reduxForm<AddPostFormValueType, PropsType>({
+    form: "AddPostFormRedux",
+  })(AddPostForm);
 
   const onSubmit = (values: AddPostFormValueType) => {
     props.addPost(values.newPostBody);
@@ -79,11 +91,3 @@ const MyPosts: React.FC<MapPropsPostType & DispatchPropsPostType> = (props) => {
 
 const MyPostsMemorized = React.memo(MyPosts);
 export default MyPostsMemorized;
-
-type AddPostFormValueType = {
-  newPostBody: string;
-};
-
-type PropsType = [];
-
-type AddPostFormValueTypeKeys = GetStringKeys<AddPostFormValueType>;

@@ -13,7 +13,7 @@ type PropsType = {
   savePhoto: (file: File) => void;
   isProfileEditMode: boolean;
   setEditMode: () => void;
-  status: String;
+  status: string;
 };
 const Profile: React.FC<PropsType> = (props) => {
   return (

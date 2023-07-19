@@ -9,7 +9,7 @@ import {
 import { maxLengthCreator, required } from "../utils/validators/validators.ts";
 import { login } from "../../redux/auth-reducer.tsx";
 import style from "../../common/FormsControls/FormsControls.module.css";
-import { AppStateType } from "../../redux/redux-store.js";
+import { AppStateType } from "../../redux/redux-store.ts";
 import { Input } from "./../../common/FormsControls/FormsControls";
 const maxLength20 = maxLengthCreator(20);
 
