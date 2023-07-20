@@ -15,8 +15,8 @@ import { reducer as formReducer } from "redux-form";
 import appReducer from "./app-reducer.ts";
 
 let rootReducer = combineReducers({
-  profilePage: profileReducer,
   dialogsPage: dialogsReducer,
+  profilePage: profileReducer,
   sidebar: sidebarReducer,
   usersPage: usersReducer,
   auth: authReducer,

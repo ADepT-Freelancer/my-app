@@ -38,6 +38,13 @@ type MapDispatchPropsType = {
 };
 type OwnPropsType = {
   pageTitle: string;
+  users: UserType[];
+  pageSize: number;
+  totalCount: number;
+  currentPage: number;
+  isFetching: boolean;
+  followingInProgress: number[];
+
   
 };
 
