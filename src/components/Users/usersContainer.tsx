@@ -37,14 +37,8 @@ type MapDispatchPropsType = {
   setCurrentPage: (pageNumber: number) => void;
 };
 type OwnPropsType = {
+  
   pageTitle: string;
-  users: UserType[];
-  pageSize: number;
-  totalCount: number;
-  currentPage: number;
-  isFetching: boolean;
-  followingInProgress: number[];
-
   
 };
 
@@ -92,7 +86,7 @@ let mapStateToProps = (state: AppStateType) => {
   };
 };
 
-// let mapStateToProps = (state) => {
+// let mapStateToProps = (state: AppStateType) => {
 //   return {
 //     users: state.usersPage.users,
 //     pageSize: state.usersPage.pageSize,
@@ -102,6 +96,7 @@ let mapStateToProps = (state: AppStateType) => {
 //     followingInProgress: state.usersPage.followingInProgress,
 //   };
 // };
+
 let setCurrentPage = actions.setCurrentPage;
 let toggleFollowingInProgress = actions.toggleFollowingInProgress;
 

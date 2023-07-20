@@ -15,10 +15,10 @@ import { reducer as formReducer } from "redux-form";
 import appReducer from "./app-reducer.ts";
 
 let rootReducer = combineReducers({
+  usersPage: usersReducer,
   dialogsPage: dialogsReducer,
   profilePage: profileReducer,
   sidebar: sidebarReducer,
-  usersPage: usersReducer,
   auth: authReducer,
   form: formReducer,
   app: appReducer,
