@@ -3,7 +3,8 @@ import React from "react";
 import Pagination from "../../common/pagination/pagination.tsx";
 import UserProfile from "./User.tsx";
 import { UserType } from "../../types/types";
-import { Formik } from "formik";
+import UsersSearchForm from "../../common/UsersSearchForm.tsx";
+import { FilterType } from "../../redux/users-reducer.ts";
 
 let Users: React.FC<PropsType> = ({
   currentPage,
@@ -28,7 +29,7 @@ let Users: React.FC<PropsType> = ({
 
   return (
     <div>
-      {/* <UsersSearchForm /> */}
+      <UsersSearchForm onFilterChanged={props.onFilterChanged} />
       <Pagination
         currentPage={currentPage}
         onPageChanged={onPageChanged}
@@ -51,45 +52,6 @@ let Users: React.FC<PropsType> = ({
   );
 };
 
-// const UsersSearchForm = () => {
-//   return (
-//     <div>
-//       <Formik
-//         initialValues={{ email: "", password: "" }}
-//         validate={(values) => {
-//           const errors = {};
-//           if (!values.email) {
-//             errors.email = "Required";
-//           } else if (
-//             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-//           ) {
-//             errors.email = "Invalid email address";
-//           }
-//           return errors;
-//         }}
-//         onSubmit={(values, { setSubmitting }) => {
-//           setTimeout(() => {
-//             alert(JSON.stringify(values, null, 2));
-//             setSubmitting(false);
-//           }, 400);
-//         }}
-//       >
-//         {({ isSubmitting }) => (
-          // <Form>
-          //   <Field type="email" name="email" />
-          //   <ErrorMessage name="email" component="div" />
-          //   <Field type="password" name="password" />
-          //   <ErrorMessage name="password" component="div" />
-          //   <button type="submit" disabled={isSubmitting}>
-          //     Submit
-          //   </button>
-          // </Form>
-//         )}
-//       </Formik>
-//     </div>
-//   );
-// };
-
 export default Users;
 
 type PropsType = {
@@ -97,6 +59,7 @@ type PropsType = {
   totalUsersCount: number;
   pageSize: number;
   onPageChanged: (pageNumber: number) => void;
+  onFilterChanged: (filter: FilterType) => void;
 
   users: UserType[];
   unfollow: (userId: number) => void;

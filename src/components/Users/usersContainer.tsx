@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Preloader from "../../common/preloader/preloader";
-
 import { UserType } from "../../types/types";
 import { AppStateType } from "../../redux/redux-store.ts";
 import {
@@ -10,6 +9,7 @@ import {
   getUsers,
   follow,
   unfollow,
+  FilterType,
 } from "./../../redux/users-reducer.ts";
 import Users from "./Users.tsx";
 import {
@@ -29,30 +29,32 @@ type MapStatePropsType = {
   users: UserType[];
   followingInProgress: number[];
 };
-
 type MapDispatchPropsType = {
-  getUsers: (pageNumber: number, pageSize: number) => void;
+  getUsers: (pageNumber: number, pageSize: number, term: string) => void;
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
   setCurrentPage: (pageNumber: number) => void;
 };
 type OwnPropsType = {
-  
   pageTitle: string;
-  
 };
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
-
 class UsersContainer extends React.Component<PropsType> {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    this.props.getUsers(this.props.currentPage, this.props.pageSize, "");
   }
 
   onPageChanged = (pageNumber: number) => {
-    this.props.getUsers(pageNumber, this.props.pageSize);
+    this.props.getUsers(pageNumber, this.props.pageSize, "");
     this.props.setCurrentPage(pageNumber);
   };
+
+  onFilterChanged= (filter: FilterType)=> {
+    const {currentPage, pageSize} = this.props
+    this.props.getUsers(currentPage, pageSize, filter.term);
+
+  }
 
   render() {
     return (
@@ -63,6 +65,7 @@ class UsersContainer extends React.Component<PropsType> {
           totalUsersCount={this.props.totalUsersCount}
           pageSize={this.props.pageSize}
           onPageChanged={this.onPageChanged}
+          onFilterChanged={this.onFilterChanged}
           currentPage={this.props.currentPage}
           users={this.props.users}
           unfollow={this.props.unfollow}
