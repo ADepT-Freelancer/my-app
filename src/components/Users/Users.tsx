@@ -5,27 +5,26 @@ import UserProfile from "./User.tsx";
 import { UserType } from "../../types/types";
 import UsersSearchForm from "../../common/UsersSearchForm.tsx";
 import { FilterType } from "../../redux/users-reducer.ts";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCurrentPage,
+  getPageSize,
+  getTotalUsersCount,
+} from "../../redux/users-selectors.ts";
 
 let Users: React.FC<PropsType> = ({
-  currentPage,
   onPageChanged,
-  totalUsersCount,
-
-  pageSize,
-  // user,
   followingInProgress,
-
   unfollow,
   follow,
   users,
-
   ...props
 }) => {
-  // let pagesCount = Math.ceil(totalUsersCount / pageSize);
-  // let pages = [];
-  // for (let i = 1; i <= pagesCount; i++) {
-  //   pages.push(i);
-  // }
+  let totalUsersCount = useSelector(getTotalUsersCount);
+  let currentPage = useSelector(getCurrentPage);
+  let pageSize = useSelector(getPageSize);
+
+  const dispatch = useDispatch()
 
   return (
     <div>
@@ -56,8 +55,9 @@ export default Users;
 
 type PropsType = {
   isFetching: boolean;
-  totalUsersCount: number;
-  pageSize: number;
+  // currentPage: number;
+  // totalUsersCount: number;
+  // pageSize: number;
   onPageChanged: (pageNumber: number) => void;
   onFilterChanged: (filter: FilterType) => void;
 
@@ -67,7 +67,5 @@ type PropsType = {
 
   followingInProgress: number[];
 
-  currentPage: number;
-  // user: UserType[];
   portionSize?: number;
 };
