@@ -4,21 +4,8 @@ import { UserType } from "../types/types";
 import { usersAPI } from "./../api/users-api";
 import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
 
-// export type InitialStateType = {
-//   users: UserType[];
-//   pageSize: number;
-//   totalCount: number;
-//   currentPage: number;
-//   isFetching: boolean;
-//   followingInProgress: number[];
-//   filter: {
-//     term: string;
-//   };
-// };
-
 export type InitialStateType = typeof initialState;
 export type FilterType = typeof initialState.filter;
-
 
 let initialState = {
   users: [] as UserType[],
@@ -29,6 +16,7 @@ let initialState = {
   followingInProgress: [] as number[],
   filter: {
     term: " ",
+    friend: null as null | boolean,
   },
 };
 
@@ -84,8 +72,8 @@ export const actions = {
   followSuccess: (userId: number) => ({ type: "FOLLOW", userId } as const),
   unfollowSuccess: (userId: number) => ({ type: "UNFOLLOW", userId } as const),
   setUsers: (users: UserType[]) => ({ type: "SETUSERS", users } as const),
-  setFilter: (term: string) =>
-    ({ type: "SET_FILTER", payload: { term } } as const),
+  setFilter: (filter: FilterType) =>
+    ({ type: "SET_FILTER", payload: filter } as const),
   setCurrentPage: (currentPage: number) =>
     ({ type: "SET_CURRENT_PAGE", currentPage } as const),
   setTotalCount: (totalCount: number) =>
@@ -99,16 +87,19 @@ export const actions = {
 export const getUsers = (
   currentPage: number,
   pageSize: number,
-  term: string
+  filter: FilterType
 ): ThunkType => {
   return async (dispatch, getState: GetStateType) => {
     dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(currentPage));
-    dispatch(actions.setFilter(term));
+    dispatch(actions.setFilter(filter));
 
-    
-    
-    let data = await usersAPI.getUsers(currentPage, pageSize, term);
+    let data = await usersAPI.getUsers(
+      currentPage,
+      pageSize,
+      filter.term,
+      filter.friend
+    );
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalCount(data.totalCount));

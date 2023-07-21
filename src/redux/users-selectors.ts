@@ -37,3 +37,8 @@ export const getFollowingInProgress = (state: AppStateType) => {
 
   return usersPage.followingInProgress;
 };
+export const getUsersFilter = (state: AppStateType) => {
+  let usersPage: InitialStateType = state.usersPage;
+
+  return usersPage.filter;
+};

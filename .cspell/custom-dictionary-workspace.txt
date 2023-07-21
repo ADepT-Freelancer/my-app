@@ -2,6 +2,7 @@
 Givangi
 globalstate
 Photoss
+unfollowed
 Виправлення
 помилок
 попадаю
