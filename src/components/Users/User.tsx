@@ -5,28 +5,12 @@ import userPhoto from "../../assets/images/user.jpg";
 import styles from "./users.module.css";
 import { UserType } from "../../types/types";
 
-type MapStatePropsType = {
-  // currentPage: number;
-  // pageSize: number;
-  // isFetching: boolean;
-  // totalUsersCount: number;
-  user: UserType;
-  followingInProgress: number[];
-};
-
-type MapDispatchPropsType = {
-  // getUsers: (pageNumber: number, pageSize: number) => void;
-  // setCurrentPage: (pageNumber: number) => void;
-
-
+type PropsType = {
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
+  followingInProgress: number[];
+  user: UserType;
 };
-type OwnPropsType = {
-  // pageTitle: string;
-};
-
-type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 const UserProfile: React.FC<PropsType> = ({
   user,

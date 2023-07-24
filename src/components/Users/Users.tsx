@@ -1,34 +1,58 @@
 /* eslint-disable eqeqeq */
-import React from "react";
+import React, { useEffect } from "react";
 import Pagination from "../../common/pagination/pagination.tsx";
 import UserProfile from "./User.tsx";
-import { UserType } from "../../types/types";
 import UsersSearchForm from "../../common/UsersSearchForm.tsx";
-import { FilterType } from "../../redux/users-reducer.ts";
+import { FilterType, actions,  getUsers} from "../../redux/users-reducer.ts";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCurrentPage,
+  getFollowingInProgress,
   getPageSize,
   getTotalUsersCount,
+  getUserSelector,
+  getUsersFilter,
 } from "../../redux/users-selectors.ts";
+import { UserType } from "../../types/types";
 
-let Users: React.FC<PropsType> = ({
-  onPageChanged,
-  followingInProgress,
-  unfollow,
-  follow,
-  users,
-  ...props
-}) => {
-  let totalUsersCount = useSelector(getTotalUsersCount);
-  let currentPage = useSelector(getCurrentPage);
-  let pageSize = useSelector(getPageSize);
+type PropsType = {};
 
-  const dispatch = useDispatch()
+export const Users: React.FC<PropsType> = (props) => {
+  const dispatch = useDispatch();
+  const totalUsersCount = useSelector(getTotalUsersCount);
+  const currentPage = useSelector(getCurrentPage);
+  const pageSize = useSelector(getPageSize);
+  const filter = useSelector(getUsersFilter);
+  const users = useSelector(getUserSelector);
+  const followingInProgress = useSelector(getFollowingInProgress);
+
+
+useEffect(()=> {
+  dispatch(getUsers(currentPage, pageSize, filter));
+
+}, [])
+
+const onPageChanged = (pageNumber: number) => {
+  dispatch(getUsers(pageNumber, pageSize, filter));
+  actions.setCurrentPage(pageNumber);
+};
+
+  const onFilterChanged = (filter: FilterType) => {
+    dispatch(getUsers(1, pageSize, filter));
+  };
+
+
+ const  follow = (userId: number) => {
+  dispatch(follow(userId))
+ };
+  const unfollow: (userId: number) => {
+  dispatch(unfollow(userId))
+
+  }; 
 
   return (
     <div>
-      <UsersSearchForm onFilterChanged={props.onFilterChanged} />
+      <UsersSearchForm onFilterChanged={onFilterChanged} />
       <Pagination
         currentPage={currentPage}
         onPageChanged={onPageChanged}
@@ -51,21 +75,4 @@ let Users: React.FC<PropsType> = ({
   );
 };
 
-export default Users;
 
-type PropsType = {
-  isFetching: boolean;
-  // currentPage: number;
-  // totalUsersCount: number;
-  // pageSize: number;
-  onPageChanged: (pageNumber: number) => void;
-  onFilterChanged: (filter: FilterType) => void;
-
-  users: UserType[];
-  unfollow: (userId: number) => void;
-  follow: (userId: number) => void;
-
-  followingInProgress: number[];
-
-  portionSize?: number;
-};

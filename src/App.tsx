@@ -21,6 +21,7 @@ import Settings from "./components/Settings/Settings";
 import "./css/style.css";
 import { initializeApp } from "./redux/app-reducer";
 import store, { AppStateType } from "./redux/redux-store";
+import { UserPage } from "./components/Users/usersContainer";
 
 const DialogsContainer = lazy(
   () => import("./components/Dialogs/DialogsContainer")
@@ -28,7 +29,6 @@ const DialogsContainer = lazy(
 const ProfileContainer = lazy(
   () => import("./components/Profile/ProfilleContainer")
 );
-const UsersContainer = lazy(() => import("./components/Users/usersContainer"));
 
 class App extends Component<DispatchPropsType & MapPropsType> {
   catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
@@ -73,7 +73,7 @@ class App extends Component<DispatchPropsType & MapPropsType> {
                 <Route path="/dialogs/*" element={<DialogsContainer />} />
                 <Route
                   path="/users"
-                  element={<UsersContainer pageTitle={"Самураи"} />}
+                  element={<UserPage pageTitle={"Самураи"} />}
                 />
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
