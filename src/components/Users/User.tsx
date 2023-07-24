@@ -6,10 +6,10 @@ import styles from "./users.module.css";
 import { UserType } from "../../types/types";
 
 type PropsType = {
+  user: UserType;
+  followingInProgress: number[];
   unfollow: (userId: number) => void;
   follow: (userId: number) => void;
-  followingInProgress: number[];
-  user: UserType;
 };
 
 const UserProfile: React.FC<PropsType> = ({
@@ -17,8 +17,8 @@ const UserProfile: React.FC<PropsType> = ({
   followingInProgress,
   unfollow,
   follow,
-  ...props
 }) => {
+  debugger;
   return (
     <div key={user.id}>
       <span>

@@ -1,7 +1,6 @@
 /* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import Pagination from "../../common/pagination/pagination.tsx";
-import UserProfile from "./User.tsx";
 import UsersSearchForm from "../../common/UsersSearchForm.tsx";
 import { FilterType, actions, getUsers } from "../../redux/users-reducer.ts";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
   getUsersFilter,
 } from "../../redux/users-selectors.ts";
 import { UserType } from "../../types/types";
+import UserProfile from './User';
 
 type PropsType = {};
 
@@ -28,7 +28,7 @@ export const Users: React.FC<PropsType> = (props) => {
 
   useEffect(() => {
     getUsers(currentPage, pageSize, filter);
-  }, []);
+  }, [currentPage, filter, pageSize]);
 
   const onPageChanged = (pageNumber: number) => {
     getUsers(pageNumber, pageSize, filter);
@@ -37,7 +37,6 @@ export const Users: React.FC<PropsType> = (props) => {
 
   const onFilterChanged = (filter: FilterType) => {
     getUsers(currentPage, pageSize, filter);
-
   };
 
   const follow = (userId: number) => {
@@ -46,7 +45,6 @@ export const Users: React.FC<PropsType> = (props) => {
   const unfollow = (userId: number) => {
     dispatch(actions.unfollowSuccess(userId));
   };
-
   return (
     <div>
       <UsersSearchForm onFilterChanged={onFilterChanged} />
