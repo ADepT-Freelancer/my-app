@@ -9,11 +9,11 @@ import {
   getFollowingInProgress,
   getPageSize,
   getTotalUsersCount,
-  getUserSelector,
+  getUserState,
   getUsersFilter,
 } from "../../redux/users-selectors.ts";
 import { UserType } from "../../types/types";
-import UserProfile from './User';
+import UserProfile from "./User";
 
 type PropsType = {};
 
@@ -21,9 +21,9 @@ export const Users: React.FC<PropsType> = (props) => {
   const dispatch = useDispatch();
   const totalUsersCount = useSelector(getTotalUsersCount);
   const currentPage = useSelector(getCurrentPage);
-  const pageSize: number = useSelector(getPageSize);
-  const filter: FilterType = useSelector(getUsersFilter);
-  const users = useSelector(getUserSelector);
+  const pageSize= useSelector(getPageSize);
+  const filter = useSelector(getUsersFilter);
+  const users = useSelector(getUserState);
   const followingInProgress = useSelector(getFollowingInProgress);
 
   useEffect(() => {
@@ -45,6 +45,7 @@ export const Users: React.FC<PropsType> = (props) => {
   const unfollow = (userId: number) => {
     dispatch(actions.unfollowSuccess(userId));
   };
+  debugger;
   return (
     <div>
       <UsersSearchForm onFilterChanged={onFilterChanged} />

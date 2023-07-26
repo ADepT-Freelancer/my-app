@@ -8,7 +8,7 @@ export const getUserSelector = (state: AppStateType) => {
   return usersPage.users;
 };
 export const getUserState = createSelector(getUserSelector, (users) => {
-  return users;
+  return users
   // .filter((u) => u.photos.large && u.status);
 });
 

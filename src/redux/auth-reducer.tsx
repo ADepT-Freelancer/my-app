@@ -48,7 +48,7 @@ export const actions = {
     } as const),
 };
 
-export const getAuthUserData = () => async (dispatch: any) => {
+export const getAuthUserData = (): ThunkType => async (dispatch) => {
   let meData = await authAPI.me();
 
   if (meData.resultCode === ResultCodeEnum.success) {
@@ -63,8 +63,8 @@ export const login =
     password: string,
     rememberMe: boolean | undefined,
     captcha: string | null
-  ) =>
-  async (dispatch: any) => {
+  ): ThunkType =>
+  async (dispatch) => {
     let loginData = await authAPI.login(email, password, rememberMe, captcha);
     if (loginData.resultCode === ResultCodeEnum.success) {
       dispatch(getAuthUserData());

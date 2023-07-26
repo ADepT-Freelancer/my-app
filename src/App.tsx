@@ -13,7 +13,7 @@ import { compose } from "redux";
 import "./App.css";
 import Preloader from "./common/preloader/preloader";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/Login";
+import {Login} from "./components/Login/Login";
 import Music from "./components/Music/Music";
 // import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
@@ -49,9 +49,9 @@ class App extends Component<DispatchPropsType & MapPropsType> {
   }
 
   render() {
-    // if (!this.props.initialized) {
-    //   return <Preloader />;
-    // }
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
     return (
       <div className="wrapper wrapper__container">
         {/* <Navbar /> */}
@@ -78,7 +78,7 @@ class App extends Component<DispatchPropsType & MapPropsType> {
                 <Route path="/news" element={<News />} />
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Navigate to="/profile" />} />
                 <Route path="*" element={<div>404 PAGE NON FOUND</div>} />
               </Routes>
