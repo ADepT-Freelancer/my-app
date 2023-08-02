@@ -52,6 +52,7 @@ const usersReducer = (
     case "SET_TOTAL_COUNT":
       return { ...state, totalCount: action.totalCount };
     case "TOGGLE_IS_FETCHING":
+      debugger;
       return { ...state, isFetching: action.isFetching };
     case "TOGGLE_IS_FOLLOWING_PROGRESS":
       return {
@@ -89,20 +90,25 @@ export const getUsers = (
   pageSize: number,
   filter: FilterType
 ): ThunkType => {
-  return async (dispatch, getState: GetStateType) => {
-    dispatch(actions.toggleIsFetching(true));
-    dispatch(actions.setCurrentPage(currentPage));
-    dispatch(actions.setFilter(filter));
-
+  return async (dispatch) => {
+    debugger;
+    console.log(111);
     let data = await usersAPI.getUsers(
       currentPage,
       pageSize,
       filter.term,
       filter.friend
     );
+
+    console.log(222);
+
+    dispatch(actions.toggleIsFetching(true));
+    dispatch(actions.setCurrentPage(currentPage));
+    dispatch(actions.setFilter(filter));
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalCount(data.totalCount));
+    console.log(333);
   };
 };
 

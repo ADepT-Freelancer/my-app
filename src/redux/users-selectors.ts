@@ -4,10 +4,13 @@ import { InitialStateType } from "./users-reducer";
 
 export const getUserSelector = (state: AppStateType) => {
   let usersPage: InitialStateType = state.usersPage;
-
+  console.log(usersPage.users);
+  console.log(1);
   return usersPage.users;
 };
 export const getUserState = createSelector(getUserSelector, (users) => {
+  console.log(users);
+  console.log(2);
   return users
   // .filter((u) => u.photos.large && u.status);
 });

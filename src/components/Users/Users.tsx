@@ -18,6 +18,7 @@ import UserProfile from "./User";
 type PropsType = {};
 
 export const Users: React.FC<PropsType> = (props) => {
+  
   const dispatch = useDispatch();
   const totalUsersCount = useSelector(getTotalUsersCount);
   const currentPage = useSelector(getCurrentPage);
@@ -25,6 +26,10 @@ export const Users: React.FC<PropsType> = (props) => {
   const filter = useSelector(getUsersFilter);
   const users = useSelector(getUserState);
   const followingInProgress = useSelector(getFollowingInProgress);
+
+  console.log(users);
+  console.log(3);
+  
 
   useEffect(() => {
     getUsers(currentPage, pageSize, filter);
@@ -45,7 +50,6 @@ export const Users: React.FC<PropsType> = (props) => {
   const unfollow = (userId: number) => {
     dispatch(actions.unfollowSuccess(userId));
   };
-  debugger;
   return (
     <div>
       <UsersSearchForm onFilterChanged={onFilterChanged} />

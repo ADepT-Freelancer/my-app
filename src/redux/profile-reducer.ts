@@ -66,7 +66,7 @@ let initialState = {
   //     small: null,
   //   },
   // },
- 
+
   profile: null as ProfileType | null,
   status: "",
   isProfileEditMode: false,
@@ -94,7 +94,6 @@ const profileReducer = (
         ],
       };
     }
-
     case "SN/PROFILE/SET_STATUS": {
       return {
         ...state,

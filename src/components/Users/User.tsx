@@ -18,7 +18,6 @@ const UserProfile: React.FC<PropsType> = ({
   unfollow,
   follow,
 }) => {
-  debugger;
   return (
     <div key={user.id}>
       <span>
