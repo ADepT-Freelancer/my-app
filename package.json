@@ -11,6 +11,7 @@
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "antd": "^5.8.1",
     "axios": "^1.4.0",
     "final": "^0.2.0",
     "final-form": "^4.20.9",
@@ -28,6 +29,7 @@
     "redux-thunk": "^2.4.2",
     "reselect": "^4.1.8",
     "typescript": "^5.1.6",
+    "use-query-params": "^2.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

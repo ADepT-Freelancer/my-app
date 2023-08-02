@@ -14,7 +14,7 @@ type FormType = {
 
 type PropsType = {
   onFilterChanged: (filter: FilterType) => void;
-};
+}
 
 const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
   const submit = (
