@@ -13,7 +13,7 @@ import { compose } from "redux";
 import "./App.css";
 import Preloader from "./common/preloader/preloader";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {Login} from "./components/Login/Login";
+import { Login } from "./components/Login/Login";
 import Music from "./components/Music/Music";
 // import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
@@ -29,6 +29,7 @@ const DialogsContainer = lazy(
 const ProfileContainer = lazy(
   () => import("./components/Profile/ProfilleContainer")
 );
+const ChatPage = lazy(() => import("./pages/chat/ChatPage"));
 
 class App extends Component<DispatchPropsType & MapPropsType> {
   catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
@@ -79,6 +80,7 @@ class App extends Component<DispatchPropsType & MapPropsType> {
                 <Route path="/music" element={<Music />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/chat" element={<ChatPage />} />
                 <Route path="/" element={<Navigate to="/profile" />} />
                 <Route path="*" element={<div>404 PAGE NON FOUND</div>} />
               </Routes>

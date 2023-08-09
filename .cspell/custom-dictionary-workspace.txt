@@ -1,7 +1,10 @@
 # Custom Dictionary Words
+ashx
 Givangi
 globalstate
 Photoss
+RECEVIED
+samuraijs
 unfollowed
 Виправлення
 помилок

@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="menu__open" >
+    <div className="menu__open">
       <nav className="menu__body">
-        <ul >
+        <ul>
           <li className={s.item}>
             <NavLink
               to="/profile"
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
               Music
             </NavLink>
           </li>
-  
+
           <li className={s.item}>
             <NavLink
               to="/users"
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
               Friends
             </NavLink>
           </li>
-  
+
           <li className={s.item}>
             <NavLink
               to="/settings"

@@ -47,11 +47,9 @@ const Header: React.FC<PropsType> = (props) => {
                   </div>
                 )}
               </li>
-
               <li className={s.item}>
                 {props.isAuth || <NavLink to={"/login"}> Login </NavLink>}
               </li>
-
               <li className={s.item}>
                 <NavLink
                   to="/profile"
@@ -74,6 +72,16 @@ const Header: React.FC<PropsType> = (props) => {
               </li>
               <li className={s.item}>
                 <NavLink
+                  to="/chat"
+                  className={({ isActive }) =>
+                    isActive ? s.active : undefined
+                  }
+                >
+                  My Chats
+                </NavLink>
+              </li>
+              <li className={s.item}>
+                <NavLink
                   to="/news"
                   className={({ isActive }) =>
                     isActive ? s.active : undefined
@@ -92,7 +100,6 @@ const Header: React.FC<PropsType> = (props) => {
                   Music
                 </NavLink>
               </li>
-
               <li className={s.item}>
                 <NavLink
                   to="/users"
@@ -103,7 +110,6 @@ const Header: React.FC<PropsType> = (props) => {
                   Friends
                 </NavLink>
               </li>
-
               <li className={s.item}>
                 <NavLink
                   to="/settings"

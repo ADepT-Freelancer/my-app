@@ -30,6 +30,8 @@ const News: React.FC<PropsType> = (props) => {
             </Button>
             <Button>
               <NavLink to="/settings">Settings</NavLink>
+            </Button>  <Button>
+              <NavLink to="/chat">My Chat</NavLink>
             </Button>
           </ButtonGroup>
         </Col>
