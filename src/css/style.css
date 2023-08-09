@@ -2688,7 +2688,6 @@ textarea.form__input {
 /* //========================== */
 
 .chat__messagesBox {
-
   border: 0.125rem solid #7e74f1;
   margin: 0.5rem 0;
   padding: 0.5rem;
@@ -2696,12 +2695,13 @@ textarea.form__input {
 
 .chat__arrowDown {
   position: relative;
-
 }
 .chat__arrowDown span {
   position: absolute;
   right: 2rem;
   bottom: 1rem;
+
+  cursor: pointer;
 
   text-align: center;
   line-height: 1.4;

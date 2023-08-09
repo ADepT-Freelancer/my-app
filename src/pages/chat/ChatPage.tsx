@@ -8,6 +8,7 @@ import {
   stopMessagesListening,
 } from "../../redux/chat-reducer";
 import { AppStateType } from "../../redux/redux-store";
+import { NavLink } from "react-router-dom";
 
 const ChatPage: React.FC = () => {
   return (
@@ -50,11 +51,13 @@ const Messages: React.FC = () => {
   const scrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
     const element = e.currentTarget;
     if (
-      Math.abs(
-        element.scrollHeight - element.scrollTop - element.clientHeight
-      ) < 50
+      Math.abs(element.scrollHeight - element.scrollTop) -
+        element.clientHeight <
+      1
     ) {
-      console.log("scrolled");
+      !isAutoScroll && setIsAutoScroll(true);
+    } else {
+      isAutoScroll && setIsAutoScroll(false);
     }
   };
 
@@ -63,6 +66,11 @@ const Messages: React.FC = () => {
       messageAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  const setIsAutoScrollTrue = () => {
+    setIsAutoScroll(true);
+    messageAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="chat__arrowDown">
@@ -76,24 +84,26 @@ const Messages: React.FC = () => {
         ))}
         <div ref={messageAnchorRef}></div>
       </div>
-
-      
-      <span>↓</span>
+      <span onClick={setIsAutoScrollTrue}>↓</span>
     </div>
   );
 };
 
-const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
-  return (
-    <div>
+const Message: React.FC<{ message: ChatMessageType }> = React.memo(
+  ({ message }) => {
+    return (
       <div>
-        <img title="Avatar" alt="Avatar" width="32" src={message.photo} />
-        <b> {message.userName}</b>
+        <div>
+          <NavLink to={"/profile/" + message.userId}>
+            <img title="Avatar" alt="Avatar" width="32" src={message.photo} />
+            <b> {message.userName}</b>
+          </NavLink>
+        </div>
+        <div>{message.message}</div>
       </div>
-      <div>{message.message}</div>
-    </div>
-  );
-};
+    );
+  }
+);
 
 const AddMessagesForm: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -106,6 +116,15 @@ const AddMessagesForm: React.FC = () => {
     }
     dispatch(sendMessage(message) as any);
     setMessage("");
+  };
+
+  document.onkeyup = function (e) {
+    e = e || window.event;
+    if (e.keyCode === 13 && e.ctrlKey === true) {
+      sendMessageHandler();
+    }
+    // Отменяем действие браузера
+    return false;
   };
 
   return (
