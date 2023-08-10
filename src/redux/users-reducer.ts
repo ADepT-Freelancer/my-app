@@ -85,32 +85,23 @@ export const actions = {
     ({ type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId } as const),
 };
 
-export const getUsers = (
-  currentPage: number,
-  pageSize: number,
-  filter: FilterType
-): ThunkType => {
-  return async (dispatch) => {
-    debugger;
-    console.log(111);
-    let data = await usersAPI.getUsers(
+export const getUsers =
+  (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
+  async (dispatch) => {
+    dispatch(actions.toggleIsFetching(true));
+
+    const data = await usersAPI.getUsers(
       currentPage,
       pageSize,
       filter.term,
       filter.friend
     );
-
-    console.log(222);
-
-    dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(currentPage));
     dispatch(actions.setFilter(filter));
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalCount(data.totalCount));
-    console.log(333);
   };
-};
 
 export const follow = (userId: number): ThunkType => {
   return async (dispatch) => {

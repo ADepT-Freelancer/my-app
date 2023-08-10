@@ -1,17 +1,14 @@
 import { createSelector } from "reselect";
 import { AppStateType } from "./redux-store";
 import { InitialStateType } from "./users-reducer";
+import { UserType } from "../types/types";
 
-export const getUserSelector = (state: AppStateType) => {
+export const getUserSelector = (state: AppStateType): UserType[] => {
   let usersPage: InitialStateType = state.usersPage;
-  console.log(usersPage.users);
-  console.log(1);
   return usersPage.users;
 };
 export const getUserState = createSelector(getUserSelector, (users) => {
-  console.log(users);
-  console.log(2);
-  return users
+  return users;
   // .filter((u) => u.photos.large && u.status);
 });
 
