@@ -17,11 +17,11 @@ import { Login } from "./components/Login/Login";
 import Music from "./components/Music/Music";
 // import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
-import Settings from "./components/Settings/Settings";
 import "./css/style.css";
 import { initializeApp } from "./redux/app-reducer";
 import store, { AppStateType } from "./redux/redux-store";
 import { UserPage } from "./components/Users/usersContainer";
+import { Settings } from "./components/Settings/Settings";
 
 const DialogsContainer = lazy(
   () => import("./components/Dialogs/DialogsContainer")
@@ -34,7 +34,6 @@ const ChatPage = lazy(() => import("./pages/chat/ChatPage"));
 class App extends Component<DispatchPropsType & MapPropsType> {
   catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
     console.log(e);
-    debugger;
   };
 
   componentDidMount() {

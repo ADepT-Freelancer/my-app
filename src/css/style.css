@@ -2714,3 +2714,55 @@ textarea.form__input {
   height: 2rem;
   width: 2rem;
 }
+
+.search-form__selected-user {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.setting-page__wrapper {
+  line-height: 150%;
+}
+.search-container {
+}
+.search-form__input {
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0.2rem 0.8rem 0.2rem 0;
+}
+.search-form__button {
+  padding: 0.3rem;
+  margin: 0.2rem 0.8rem;
+  background-color: #7e74f1;
+  border-radius: 0.5rem;
+}
+.search-form__users {
+}
+.users__list {
+  padding: 1rem;
+  background-color: #7e74f1;
+  border-radius: 0.5rem;
+  margin: 1rem auto;
+  line-height: 150%;
+}
+.search-form__about-user {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  line-height: 150%;
+  border: 0.5rem solid #7e74f1;
+}
+.about-user__name {
+}
+.about-user__details {
+}
+
+.details__avatar-box-ibg {
+  padding-bottom: 80%;
+}
+
+.details__avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

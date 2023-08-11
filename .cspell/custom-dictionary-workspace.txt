@@ -1,5 +1,7 @@
 # Custom Dictionary Words
 ashx
+Dimych
+fuchko
 Givangi
 globalstate
 occured

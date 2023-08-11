@@ -52,7 +52,6 @@ const usersReducer = (
     case "SET_TOTAL_COUNT":
       return { ...state, totalCount: action.totalCount };
     case "TOGGLE_IS_FETCHING":
-      debugger;
       return { ...state, isFetching: action.isFetching };
     case "TOGGLE_IS_FOLLOWING_PROGRESS":
       return {

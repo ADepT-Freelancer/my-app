@@ -202,7 +202,6 @@ export const updateStatus =
         dispatch(actions.setUserStatus(status));
       }
     } catch (error) {
-      debugger;
     }
   };
 

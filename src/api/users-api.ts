@@ -8,7 +8,6 @@ export const usersAPI = {
     term: string = " ",
     friend: null | boolean = null
   ) {
-    debugger;
     const res = await instance.get<GetItemsType>(
       `users?page=${currentPage}&count=${pageSize}&term=${term}` +
         (friend === null ? "" : `&friend=${friend}`)
