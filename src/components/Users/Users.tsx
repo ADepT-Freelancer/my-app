@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "../../common/pagination/pagination.tsx";
 import UsersSearchForm from "../../common/UsersSearchForm.tsx";
 import { FilterType, actions, getUsers } from "../../redux/users-reducer.ts";
@@ -9,6 +9,7 @@ import {
   getFollowingInProgress,
   getPageSize,
   getTotalUsersCount,
+  getUserSelector,
   getUserState,
   getUsersFilter,
 } from "../../redux/users-selectors.ts";
@@ -17,17 +18,19 @@ import UserProfile from "./User";
 
 type PropsType = {};
 
-export const Users: React.FC<PropsType> = (props) => {
+export const Users: React.FC<PropsType> = () => {
   const dispatch = useDispatch();
   const totalUsersCount = useSelector(getTotalUsersCount);
   const currentPage = useSelector(getCurrentPage);
   const pageSize = useSelector(getPageSize);
   const filter = useSelector(getUsersFilter);
   const users = useSelector(getUserState);
+  const users2 = useSelector(getUserSelector);
   const followingInProgress = useSelector(getFollowingInProgress);
 
-  console.log(users);
   console.log(3);
+  console.log(users);
+  console.log(users2);
 
   useEffect(() => {
     getUsers(currentPage, pageSize, filter);
@@ -59,15 +62,16 @@ export const Users: React.FC<PropsType> = (props) => {
       />
 
       <div className="users__items">
-        {users.map((user: UserType) => (
-          <UserProfile
-            key={user.id}
-            user={user}
-            followingInProgress={followingInProgress}
-            unfollow={unfollow}
-            follow={follow}
-          />
-        ))}
+        {users &&
+          users.map((user: UserType) => (
+            <UserProfile
+              key={user.id}
+              user={user}
+              followingInProgress={followingInProgress}
+              unfollow={unfollow}
+              follow={follow}
+            />
+          ))}
       </div>
     </div>
   );

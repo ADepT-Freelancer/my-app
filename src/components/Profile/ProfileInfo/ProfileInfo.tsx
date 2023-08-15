@@ -72,24 +72,28 @@ const SocialNetworks: React.FC<SocialNetworksType> = ({ profile }) => {
     <ul className="main-section__social social">
       <li className="social__item">
         <a
+          title="link__instagram"
           href={profile.contacts.instagram || " "}
           className="social__link _icon-s-instagram"
         />
       </li>
       <li className="social__item">
         <a
+          title="link__git"
           href={profile.contacts.github || " "}
           className="social__link _icon-s-git"
         />
       </li>
       <li className="social__item">
         <a
+          title="link__twitter"
           href={profile.contacts.twitter || " "}
           className="social__link _icon-s-twitter"
         />
       </li>
       <li className="social__item">
         <a
+          title="link__linkedin"
           href={profile.contacts.mainLink || " "}
           className="social__link _icon-s-linkedin"
         />

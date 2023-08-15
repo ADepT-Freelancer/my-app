@@ -181,6 +181,7 @@ export const actions = {
 export const getUserProfile =
   (userId: number): ThunkType =>
   async (dispatch) => {
+    debugger
     let profileData = await usersAPI.getUserProfile(userId);
 
     dispatch(actions.setUserProfile(profileData));

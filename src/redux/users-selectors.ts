@@ -5,6 +5,7 @@ import { UserType } from "../types/types";
 
 export const getUserSelector = (state: AppStateType): UserType[] => {
   let usersPage: InitialStateType = state.usersPage;
+
   return usersPage.users;
 };
 export const getUserState = createSelector(getUserSelector, (users) => {

@@ -2,63 +2,78 @@ import React, { useEffect, useState } from "react";
 import "../../css/style.css";
 import axios from "axios";
 
+var isTimerGlobal = 1;
+
 type SearchUserType = {
   login: string;
   id: number;
 };
 type SearchResult = { items: SearchUserType[] };
-
 type UserType = {
   id: number;
   login: string;
   avatar_url: string;
 };
-
 export const Settings = () => {
-  const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null);
+  const initialTimeSeconds = 3;
   const [users, setUsers] = useState<SearchUserType[]>([]);
-  const [tempSearch, setTempSearch] = useState("fuchko");
-  const [searchTemp, setSearchTemp] = useState("fuchko");
   const [userDetails, setUserDetails] = useState<null | UserType>(null);
-
-  useEffect(() => {
-    if (selectedUser) {
-      document.title = selectedUser.login;
-    }
-  }, [selectedUser]);
-
-  useEffect(() => {
-    axios
-      .get<SearchResult>(`https://api.github.com/search/users?q=${searchTemp}`)
-      .then((res) => {
-        setUsers(res.data.items);
-      });
-  }, [searchTemp]);
-
-  useEffect(() => {
-    console.log(123);
-
-    if (!!selectedUser) {
-      axios
-        .get<UserType>(`https://api.github.com/users/${selectedUser.login}`)
-        .then((res) => {
-          setUserDetails(res.data);
-        });
-    }
-  }, [selectedUser]);
+  const [seconds, setSeconds] = useState(initialTimeSeconds);
+  const [selectUsersChanged, setSelectUsersChanged] = useState(" ");
 
   return (
     <div className="setting-page__wrapper">
       My different tests
       <div className="search-container">
-        <SearchFormUsers usersProps={users} selectedUser={selectedUser} />
-        <UserDetails userDetailsProps={userDetails} />
+        <SearchFormInput setUsers={setUsers} />
+        <SearchFormUsers
+        setSelectUsersChanged={setSelectUsersChanged}
+          initialTimeSeconds={initialTimeSeconds}
+          users={users}
+          setUserDetails={setUserDetails}
+          setSeconds={setSeconds}
+        />
+        <UserDetails
+        selectUsersChanged={selectUsersChanged}
+          initialTimeSeconds={initialTimeSeconds}
+          setSeconds={setSeconds}
+          seconds={seconds}
+          userDetails={userDetails}
+          setUserDetails={setUserDetails}
+        />
       </div>
     </div>
   );
 };
+type SearchFormInputType = {
+  setUsers: (users: SearchUserType[]) => void;
+};
+type SearchFormUsersType = {
+  setSelectUsersChanged:(selectUsersChanged: string) => void
+  initialTimeSeconds: number;
+  setSeconds: (initialTimeSecond: number) => void;
+  setUserDetails: (userDetails: UserType | null) => void;
+  users: SearchUserType[];
+};
+type UserDetailsType = {
+  selectUsersChanged: string
+  initialTimeSeconds: number;
+  setSeconds: (initialTimeSecond: number) => void;
+  seconds: number;
+  userDetails: null | UserType;
+  setUserDetails: (userDetails: null | UserType) => void;
+};
+const SearchFormInput: React.FC<SearchFormInputType> = (props) => {
+  const [tempSearch, setTempSearch] = useState("fuchko");
+  const [searchTemp, setSearchTemp] = useState("fuchko");
 
-const SearchFormInput: React.FC<> = () => {
+  useEffect(() => {
+    axios
+      .get<SearchResult>(`https://api.github.com/search/users?q=${searchTemp}`)
+      .then((res) => {
+        props.setUsers(res.data.items);
+      });
+  }, [searchTemp]);
   return (
     <div className="search-form__form">
       <input
@@ -69,6 +84,8 @@ const SearchFormInput: React.FC<> = () => {
         className="search-form__input"
         type="text"
       />
+
+      {isTimerGlobal === 0 && "FINISHED"}
       <button
         onClick={() => {
           setSearchTemp(tempSearch);
@@ -80,14 +97,31 @@ const SearchFormInput: React.FC<> = () => {
     </div>
   );
 };
-const SearchFormUsers: React.FC<SearchUserType[]> = (
-  usersProps,
-  selectedUser
-) => {
+const SearchFormUsers: React.FC<SearchFormUsersType> = (props) => {
+  const [selectedUser, setSelectedUser] = useState<SearchUserType | null>(null);
+  useEffect(() => {
+    if (selectedUser) {
+      document.title = selectedUser.login;
+      props.setSelectUsersChanged(selectedUser.login)
+    }
+  }, [selectedUser]);
+
+  useEffect(() => {
+    if (!!selectedUser) {
+      isTimerGlobal = 3;
+
+      axios
+        .get<UserType>(`https://api.github.com/users/${selectedUser.login}`)
+        .then((res) => {
+          // props.setSeconds(props.initialTimeSeconds);
+          props.setUserDetails(res.data);
+        });
+    }
+  }, [selectedUser]);
   return (
     <div className="search-form__users">
       <ul className="users__list">
-        {usersProps.map((u) => (
+        {props.users.map((u: SearchUserType) => (
           <li
             key={u.id}
             className={selectedUser === u ? "search-form__selected-user" : ""}
@@ -102,24 +136,73 @@ const SearchFormUsers: React.FC<SearchUserType[]> = (
     </div>
   );
 };
+const UserDetails: React.FC<UserDetailsType> = (props) => {
+  const isTimerFinished = () => props.setUserDetails(null);
 
-const UserDetails: React.FC<null | UserType> = (userDetailsProps) => {
   return (
     <div className="search-form__about-user">
-      {userDetailsProps && (
-        <h2 className="about-user__name"> {userDetailsProps.login}</h2>
-      )}
-      {userDetailsProps && (
+      {props.userDetails && (
         <div className="about-user__details">
+          <Timer
+          selectUsersChanged={props.selectUsersChanged}
+            initialTimeSeconds={props.initialTimeSeconds}
+            setSeconds={props.setSeconds}
+            seconds={props.seconds}
+            isTimerFinished={isTimerFinished}
+          />
+
+          <h2 className="about-user__name"> {props.userDetails.login}</h2>
+
           <div className="details__avatar-box-ibg">
             <img
               className="details__avatar"
-              src={userDetailsProps.avatar_url}
+              src={props.userDetails.avatar_url}
               alt="avatar"
             />
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+type TimerType = {
+  selectUsersChanged: string
+  initialTimeSeconds: number;
+  isTimerFinished: () => void;
+  seconds: number;
+  setSeconds: (actualTime: number) => void;
+};
+const Timer: React.FC<TimerType> = (props) => {
+  let [seconds, setSeconds] = useState(props.seconds);
+
+  useEffect(() => {
+    setSeconds(props.seconds);
+  }, [props.seconds]);
+
+  useEffect(() => {
+    props.seconds === 0 && props.isTimerFinished();
+    props.setSeconds(seconds);
+    console.log(seconds);
+    console.log(props.seconds);
+    props.seconds === 0 && props.setSeconds(props.initialTimeSeconds);
+  }, [seconds]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log("TICK-CLACK")
+      setSeconds((prev) => prev - 1); // or we can use: (--seconds)
+    }, 1000);
+    console.log(props.selectUsersChanged)
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [props.selectUsersChanged]);
+
+  return (
+    <div className="timer__wrapper">
+      <div className="timer__content">Time left: {seconds}</div>
     </div>
   );
 };
