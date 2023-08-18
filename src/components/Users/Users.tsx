@@ -1,17 +1,22 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect, useState } from "react";
-import Pagination from "../../common/pagination/pagination.tsx";
-import UsersSearchForm from "../../common/UsersSearchForm.tsx";
-import { FilterType, actions, getUsers } from "../../redux/users-reducer.ts";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import UsersSearchForm from "../../common/UsersSearchForm.tsx";
+import Pagination from "../../common/pagination/pagination.tsx";
+import {
+  FilterType,
+  actions,
+  requestUsers,
+} from "../../redux/users-reducer.ts";
 import {
   getCurrentPage,
   getFollowingInProgress,
   getPageSize,
   getTotalUsersCount,
-  getUserSelector,
-  getUserState,
   getUsersFilter,
+  // getUsersSelector,
+  getUsersState,
 } from "../../redux/users-selectors.ts";
 import { UserType } from "../../types/types";
 import UserProfile from "./User";
@@ -19,30 +24,43 @@ import UserProfile from "./User";
 type PropsType = {};
 
 export const Users: React.FC<PropsType> = () => {
-  const dispatch = useDispatch();
   const totalUsersCount = useSelector(getTotalUsersCount);
   const currentPage = useSelector(getCurrentPage);
   const pageSize = useSelector(getPageSize);
   const filter = useSelector(getUsersFilter);
-  const users = useSelector(getUserState);
-  const users2 = useSelector(getUserSelector);
+  const users = useSelector(getUsersState);
   const followingInProgress = useSelector(getFollowingInProgress);
 
-  console.log(3);
-  console.log(users);
-  console.log(users2);
+  const dispatch = useDispatch();
+  const history = useNavigate();
+
+  // useEffect(() => {
+  //   const parsed = queryString.parse(history.location.search.substr(1)) as {
+  //     term: string;
+  //     page: string;
+  //     friend: string;
+  //   };
+  // });
 
   useEffect(() => {
-    getUsers(currentPage, pageSize, filter);
-  }, [currentPage, filter, pageSize]);
+    history(
+      `?page=${currentPage}&count=${pageSize}&term=${filter.term}` +
+        (filter.friend === null ? "" : `&friend=${filter.friend}`)
+    );
+  }, [filter, currentPage]);
+
+  useEffect(() => {
+    dispatch(requestUsers(currentPage, pageSize, filter));
+  }, []);
 
   const onPageChanged = (pageNumber: number) => {
-    getUsers(pageNumber, pageSize, filter);
-    actions.setCurrentPage(pageNumber);
+
+    dispatch(requestUsers(pageNumber, pageSize, filter));
+    // actions.setCurrentPage(pageNumber);
   };
 
   const onFilterChanged = (filter: FilterType) => {
-    getUsers(currentPage, pageSize, filter);
+    dispatch(requestUsers(currentPage, pageSize, filter));
   };
 
   const follow = (userId: number) => {

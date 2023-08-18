@@ -181,7 +181,6 @@ export const actions = {
 export const getUserProfile =
   (userId: number): ThunkType =>
   async (dispatch) => {
-    debugger
     let profileData = await usersAPI.getUserProfile(userId);
 
     dispatch(actions.setUserProfile(profileData));
@@ -202,8 +201,7 @@ export const updateStatus =
       if (res.resultCode === 0) {
         dispatch(actions.setUserStatus(status));
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
 export const savePhotoss =

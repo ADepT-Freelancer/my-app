@@ -48,6 +48,7 @@ let Pagination: React.FC<PropsType> = ({
                 className={currentPage === p && styles.selector__page}
                 onClick={(e) => {
                   onPageChanged(p);
+                  console.log("onPageChanged", p)
                 }}
               >
                 {p}

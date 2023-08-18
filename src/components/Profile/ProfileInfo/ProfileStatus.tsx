@@ -36,12 +36,10 @@ class ProfileStatus extends React.Component<PropsType, StateType> {
       this.setState({
         status: this.props.status,
       });
-      console.log(" componentDidUpdate");
     }
   }
 
   render() {
-    console.log("render status");
     return (
       <section data-fp-section="" className="page__main main-section">
         {!this.state.editMode && (

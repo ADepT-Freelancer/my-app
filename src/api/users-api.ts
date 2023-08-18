@@ -2,19 +2,35 @@ import { GetItemsType, ResponseTypeAPI, instance } from "./api";
 import { profileAPI } from "./profile-api";
 
 export const usersAPI = {
-  async getUsers(
+  // async getUsers(
+  //   currentPage = 1,
+  //   pageSize = 10,
+  //   term: string = " ",
+  //   friend: null | boolean = null
+  // ) {
+  //   const res = await instance.get<GetItemsType>(
+  //     `users?page=${currentPage}&count=${pageSize}&term=${term}` +
+  //       (friend === null ? "" : `&friend=${friend}`)
+  //   );
+  //   return res.data;
+  // },
+
+  getUsers(
     currentPage = 1,
     pageSize = 10,
-    term: string = " ",
+    term: string = "",
     friend: null | boolean = null
   ) {
-    debugger;
-    const res = await instance.get<GetItemsType>(
-      `users?page=${currentPage}&count=${pageSize}&term=${term}` +
-        (friend === null ? "" : `&friend=${friend}`)
-    );
-    return res.data;
+    return instance
+      .get<GetItemsType>(
+        `users?page=${currentPage}&count=${pageSize}&term=${term}` +
+          (friend === null ? "" : `&friend=${friend}`)
+      )
+      .then((res) => {
+        return res.data;
+      });
   },
+
   getUserProfile(userId: number) {
     console.warn("Obsolete method. Please use profileAPI object");
     return profileAPI.getUserProfile(userId);

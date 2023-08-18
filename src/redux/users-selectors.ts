@@ -3,12 +3,12 @@ import { AppStateType } from "./redux-store";
 import { InitialStateType } from "./users-reducer";
 import { UserType } from "../types/types";
 
-export const getUserSelector = (state: AppStateType): UserType[] => {
-  let usersPage: InitialStateType = state.usersPage;
+export const getUsersSelector = (state: AppStateType): UserType[] => {
+  // let usersPage: InitialStateType = state.usersPage;
 
-  return usersPage.users;
+  return state.usersPage.users;
 };
-export const getUserState = createSelector(getUserSelector, (users) => {
+export const getUsersState = createSelector(getUsersSelector, (users) => {
   return users;
   // .filter((u) => u.photos.large && u.status);
 });

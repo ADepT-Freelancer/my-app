@@ -183,17 +183,13 @@ const Timer: React.FC<TimerType> = (props) => {
   useEffect(() => {
     props.seconds === 0 && props.isTimerFinished();
     props.setSeconds(seconds);
-    console.log(seconds);
-    console.log(props.seconds);
     props.seconds === 0 && props.setSeconds(props.initialTimeSeconds);
   }, [seconds]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      console.log("TICK-CLACK")
       setSeconds((prev) => prev - 1); // or we can use: (--seconds)
     }, 1000);
-    console.log(props.selectUsersChanged)
 
     return () => {
       clearInterval(intervalId);

@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { Dispatch } from "redux";
+import { Dispatch } from "react";
 import { UserType } from "../types/types";
 import { usersAPI } from "./../api/users-api";
 import { AppStateType, BaseThunkType, InferActionsTypes } from "./redux-store";
@@ -46,7 +46,6 @@ const usersReducer = (
         }),
       };
     case "SET_USERS": {
-      debugger;
       return { ...state, users: [...action.users] };
     }
     case "SET_CURRENT_PAGE":
@@ -86,27 +85,26 @@ export const actions = {
     ({ type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId } as const),
 };
 
-export const getUsers = (
+export const requestUsers = (
   currentPage: number,
   pageSize: number,
   filter: FilterType
-): ThunkType => {
-  debugger;
-  return async (dispatch) => {
+): ThunkType | any => {
+  return async (dispatch: any) => {
+    dispatch(actions.toggleIsFetching(true));
+    dispatch(actions.setCurrentPage(currentPage));
+    dispatch(actions.setFilter(filter));
+
     let data = await usersAPI.getUsers(
       currentPage,
       pageSize,
       filter.term,
       filter.friend
     );
-    debugger;
-    dispatch(actions.toggleIsFetching(true));
-    dispatch(actions.setCurrentPage(currentPage));
-    dispatch(actions.setFilter(filter));
 
+    dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalCount(data.totalCount));
-    dispatch(actions.toggleIsFetching(false));
   };
 };
 
@@ -140,3 +138,4 @@ export type GetStateType = () => AppStateType;
 export type DispatchType = () => Dispatch<ActionsTypes>;
 export type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes>;
+type reqUsersType = () => typeof requestUsers;
