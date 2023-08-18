@@ -54,13 +54,13 @@ export const Users: React.FC<PropsType> = () => {
   }, []);
 
   const onPageChanged = (pageNumber: number) => {
-
     dispatch(requestUsers(pageNumber, pageSize, filter));
     // actions.setCurrentPage(pageNumber);
   };
 
   const onFilterChanged = (filter: FilterType) => {
     dispatch(requestUsers(currentPage, pageSize, filter));
+    dispatch(actions.setCurrentPage(1));
   };
 
   const follow = (userId: number) => {
